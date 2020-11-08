@@ -1,0 +1,11 @@
+ITransaction=com.supermarket.ts.impl.TransactionImpl
+IUserDao=com.supermarket.dao.impl.UserDaoImpl
+IAccountDao=com.supermarket.dao.impl.AccountDaoImpl
+ISupplierDao=com.supermarket.dao.impl.SupplierDaoImpl
+IOrderByCommodityDao=com.supermarket.dao.impl.OrderByCommodityDaoImpl
+IOrderBySupplierDao=com.supermarket.dao.impl.OrderBySupplierDaoImpl
+IAccountService=com.supermarket.service.impl.AccountServiceImpl
+IOrderByCommodityService=com.supermarket.service.impl.OrderByCommodityServiceImpl
+IOrderBySupplierService=com.supermarket.service.impl.OrderBySupplierServiceImpl
+ISupplierService=com.supermarket.service.impl.SupplierServiceImpl
+IUserService=com.supermarket.service.impl.UserServiceImpl
