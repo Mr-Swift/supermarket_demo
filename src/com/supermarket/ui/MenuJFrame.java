@@ -941,6 +941,7 @@ public class MenuJFrame extends JFrame implements Runnable{
                     for (Object obj : user_rows) {
                         if(jTable_user.getValueAt((Integer) obj,1).equals(userName)){
                             JOptionPane.showMessageDialog(MenuJFrame.this,"您不能删除当前登陆的用户！");
+                            continue;
                         }
                         userSet.add(jTable_user.getValueAt((Integer) obj, 0));
                     }

