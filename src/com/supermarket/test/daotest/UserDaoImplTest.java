@@ -1,4 +1,4 @@
-package com.supermarket.test;
+package com.supermarket.test.daotest;
 
 import com.supermarket.dao.IUserDao;
 import com.supermarket.dao.impl.UserDaoImpl;

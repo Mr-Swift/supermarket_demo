@@ -1,7 +1,7 @@
 package com.supermarket.entity;
 
 import java.io.Serializable;
-
+@SuppressWarnings("all")
 public class GroupByCommodity implements Serializable {
     private String commodityName;
     private int num;

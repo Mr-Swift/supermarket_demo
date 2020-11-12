@@ -3,6 +3,9 @@ package com.supermarket.ui;
 import com.supermarket.entity.User;
 import com.supermarket.factory.ObjectFactory;
 import com.supermarket.service.IUserService;
+import com.supermarket.ui.combbox.ComBoBoxOfAuthority;
+import com.supermarket.ui.jframeutil.CheckOfNull;
+import com.supermarket.ui.jframeutil.LoginToMenu;
 
 import javax.swing.*;
 import java.awt.*;
@@ -42,7 +45,7 @@ public class LoginJFrame extends JFrame {
         JPasswordField jPasswordField=new JPasswordField(15);
         JLabel jLabelAuthority =new JLabel("身份：");
         //此处少一个combobox
-        jComboBox=new ComBoxOfAuthority().getComBoBoxOfAuthority();
+        jComboBox=new ComBoBoxOfAuthority().getComBoBoxOfAuthority();
         JButton jButtonLogin=new JButton("登录系统");
         JButton jButtonReSet=new JButton("重置");
 
@@ -109,13 +112,17 @@ public class LoginJFrame extends JFrame {
                     JOptionPane.showMessageDialog(LoginJFrame.this,"密码不可为空!");
                 }else if(!map_nameToPassword.get(loginName).equals(loginPassword)){
                     JOptionPane.showMessageDialog(LoginJFrame.this,"密码不正确!");
-                }else if(loginAuthority.equals(ComBoxOfAuthority.first)){
+                }else if(loginAuthority.equals(ComBoBoxOfAuthority.first)){
                     JOptionPane.showMessageDialog(LoginJFrame.this,"身份不可为空!");
                 }else if(!map_nameToAuthority.get(loginName).equals(loginAuthority)){
                     JOptionPane.showMessageDialog(LoginJFrame.this,"身份不正确!");
                 }else{
                     LoginToMenu.map.put(loginAuthority, loginName);
-                    new MenuJFrame();
+//                    try {
+//                        new MenuJFrame();
+//                    } catch (SQLException throwables) {
+//                        throwables.printStackTrace();
+//                    }
                     dispose();
                 }
             }
@@ -150,13 +157,17 @@ public class LoginJFrame extends JFrame {
                         JOptionPane.showMessageDialog(LoginJFrame.this, "密码不可为空!");
                     } else if (!map_nameToPassword.get(loginName).equals(loginPassword)) {
                         JOptionPane.showMessageDialog(LoginJFrame.this, "密码不正确!");
-                    } else if (loginAuthority.equals(ComBoxOfAuthority.first)) {
+                    } else if (loginAuthority.equals(ComBoBoxOfAuthority.first)) {
                         JOptionPane.showMessageDialog(LoginJFrame.this, "身份不可为空!");
                     } else if (!map_nameToAuthority.get(loginName).equals(loginAuthority)) {
                         JOptionPane.showMessageDialog(LoginJFrame.this, "身份不正确!");
                     } else {
                         LoginToMenu.map.put(loginAuthority, loginName);
-                        new MenuJFrame();
+//                        try {
+//                            new MenuJFrame();
+//                        } catch (SQLException throwables) {
+//                            throwables.printStackTrace();
+//                        }
                         dispose();
                     }
                 }
@@ -192,13 +203,17 @@ public class LoginJFrame extends JFrame {
                     JOptionPane.showMessageDialog(LoginJFrame.this, "密码不可为空!");
                 } else if (!map_nameToPassword.get(loginName).equals(loginPassword)) {
                     JOptionPane.showMessageDialog(LoginJFrame.this, "密码不正确!");
-                } else if (loginAuthority.equals(ComBoxOfAuthority.first)) {
+                } else if (loginAuthority.equals(ComBoBoxOfAuthority.first)) {
                     JOptionPane.showMessageDialog(LoginJFrame.this, "身份不可为空!");
                 } else if (!map_nameToAuthority.get(loginName).equals(loginAuthority)) {
                     JOptionPane.showMessageDialog(LoginJFrame.this, "身份不正确!");
                 } else {
                     LoginToMenu.map.put(loginAuthority, loginName);
-                    new MenuJFrame();
+//                    try {
+//                        new MenuJFrame();
+//                    } catch (SQLException throwables) {
+//                        throwables.printStackTrace();
+//                    }
                     dispose();
                 }
             }
@@ -235,13 +250,17 @@ public class LoginJFrame extends JFrame {
                         JOptionPane.showMessageDialog(LoginJFrame.this,"密码不可为空!");
                     }else if(!map_nameToPassword.get(loginName).equals(loginPassword)){
                         JOptionPane.showMessageDialog(LoginJFrame.this,"密码不正确!");
-                    }else if(loginAuthority.equals(ComBoxOfAuthority.first)){
+                    }else if(loginAuthority.equals(ComBoBoxOfAuthority.first)){
                         JOptionPane.showMessageDialog(LoginJFrame.this,"身份不可为空!");
                     }else if(!map_nameToAuthority.get(loginName).equals(loginAuthority)){
                         JOptionPane.showMessageDialog(LoginJFrame.this,"身份不正确!");
                     }else{
                         LoginToMenu.map.put(loginAuthority, loginName);
-                        new MenuJFrame();
+//                        try {
+//                            new MenuJFrame();
+//                        } catch (SQLException throwables) {
+//                            throwables.printStackTrace();
+//                        }
                         dispose();
                     }
                 }

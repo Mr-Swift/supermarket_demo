@@ -52,6 +52,24 @@ public class AccountServiceImpl implements IAccountService {
         return list;
     }
 
+
+    @Override
+    public Object listById(int id) {
+        List<Account> list = null;
+        try {
+            list = (List<Account>) iAccountDao.listById(id);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }finally{
+            try {
+                DbUtil.closeConnection();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return list;
+    }
+
     @Override
     public Object listByPay(String pay) throws SQLException {
         List<Account> list = null;
@@ -149,7 +167,7 @@ public class AccountServiceImpl implements IAccountService {
     public Object getCountsOfId() throws SQLException {
         int result=-1;
         try {
-            result = (int) iAccountDao.listAccounts();
+            result = (int) iAccountDao.getCountsOfId();
         } catch (SQLException e) {
             e.printStackTrace();
         }finally{

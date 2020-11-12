@@ -48,6 +48,11 @@ public class UserDaoImpl implements IUserDao {
     }
 
     @Override
+    public Object listById(int id) throws SQLException {
+        return JdbcTemplate.executeQuery(getBasicQueryStr()+" where user_id=?",new UserObjectMap(),id);
+    }
+
+    @Override
     public Object insertUser(User user) throws SQLException {
         return JdbcTemplate.executeUpdate("insert into tb_user (user_name,password,sex,age,user_telphone,user_address,authority) values (?,?,?,?,?,?,?)",user.getUser_name(),user.getPassword(),user.getSex(),user.getAge(),user.getUser_telphone(),user.getUser_address(),user.getAuthority());
     }
@@ -75,7 +80,7 @@ public class UserDaoImpl implements IUserDao {
 
     @Override
     public Object getCountsOfId() throws SQLException {
-        List<Integer> list=JdbcTemplate.executeQuery("select count(user_id) from tb_account", new IObjectMapper() {
+        List<Integer> list=JdbcTemplate.executeQuery("select count(user_id) from tb_user", new IObjectMapper() {
             @Override
             public Object getObjectFromResultSet(ResultSet resultSet) throws SQLException {
                 return resultSet.getInt(1);

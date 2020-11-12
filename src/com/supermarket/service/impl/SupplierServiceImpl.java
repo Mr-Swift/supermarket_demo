@@ -35,6 +35,40 @@ public class SupplierServiceImpl implements ISupplierService {
     }
 
     @Override
+    public Object listSupplierNames() throws SQLException {
+        List<String> list =null;
+        try {
+            list = (List<String>) iSupplierDao.listSupplierNames();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }finally{
+            try {
+                DbUtil.closeConnection();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return list;
+    }
+
+    @Override
+    public Object listById(int id) {
+        List<Supplier> list = null;
+        try {
+            list = (List<Supplier>) iSupplierDao.listById(id);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }finally{
+            try {
+                DbUtil.closeConnection();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return list;
+    }
+
+    @Override
     public Object listBySupplierName(String supplierName) throws SQLException {
         List<Supplier> list = null;
         try {

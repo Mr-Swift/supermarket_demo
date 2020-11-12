@@ -7,6 +7,7 @@ import com.supermarket.util.JdbcTemplate;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 @SuppressWarnings("all")
@@ -25,7 +26,7 @@ public class SupplierDaoImpl implements ISupplierDao {
             Supplier supplier = new Supplier();
             supplier.setSupplier_id(resultSet.getInt("supplier_id"));
             supplier.setSupplier_name(resultSet.getString("supplier_name"));
-            supplier.setSupplier_description(resultSet.getString("supplier_descriction"));
+            supplier.setSupplier_description(resultSet.getString("supplier_description"));
             supplier.setLinkman(resultSet.getString("linkman"));
             supplier.setSupplier_telphone(resultSet.getString("supplier_telphone"));
             supplier.setSupplier_address(resultSet.getString("supplier_address"));
@@ -39,8 +40,31 @@ public class SupplierDaoImpl implements ISupplierDao {
     }
 
     @Override
+    public Object listSupplierNames() throws SQLException {
+        List<Supplier> list=JdbcTemplate.executeQuery("select supplier_name from tb_supplier", new IObjectMapper() {
+            @Override
+            public Object getObjectFromResultSet(ResultSet resultSet) throws SQLException {
+                Supplier supplier = new Supplier();
+                supplier.setSupplier_name(resultSet.getString("supplier_name"));
+                return supplier;
+            }
+        },null);
+        List<String> listOfName=new ArrayList<>();
+        for(Object obj:list){
+            Supplier supplier= (Supplier) obj;
+            listOfName.add(supplier.getSupplier_name());
+        }
+        return listOfName;
+    }
+
+    @Override
     public Object listBySupplierName(String supplierName) throws SQLException {
         return JdbcTemplate.executeQuery(getBasicQueryStr()+" where supplier_name=?",new SupplierObjectMap(),supplierName);
+    }
+
+    @Override
+    public Object listById(int id) throws SQLException {
+        return JdbcTemplate.executeQuery(getBasicQueryStr()+" where supplier_id?",new SupplierObjectMap(),id);
     }
 
     @Override
@@ -71,7 +95,7 @@ public class SupplierDaoImpl implements ISupplierDao {
 
     @Override
     public Object getCountsOfId() throws SQLException {
-        List<Integer> list=JdbcTemplate.executeQuery("select count(supplier_id) from tb_account", new IObjectMapper() {
+        List<Integer> list=JdbcTemplate.executeQuery("select count(supplier_id) from tb_supplier", new IObjectMapper() {
             @Override
             public Object getObjectFromResultSet(ResultSet resultSet) throws SQLException {
                 return resultSet.getInt(1);

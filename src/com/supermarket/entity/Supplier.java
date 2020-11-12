@@ -14,6 +14,10 @@ public class Supplier implements Serializable {
     public Supplier() {
     }
 
+    public Supplier(String supplier_name) {
+        this.supplier_name = supplier_name;
+    }
+
     public Supplier(String supplier_name, String supplier_description, String linkman, String supplier_telphone, String supplier_address) {
         this.supplier_name = supplier_name;
         this.supplier_description = supplier_description;

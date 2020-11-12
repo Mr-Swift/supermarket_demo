@@ -9,6 +9,7 @@ import java.util.Set;
 public interface IAccountDao<T>{
     public T listAccounts() throws SQLException;
     public T listByName(String accountName) throws SQLException;
+    public T listById(int id) throws SQLException;
     public T listByPay(String pay) throws SQLException;
     public T insertAccount(Account account) throws SQLException;
     public T modifyAccount(Account account) throws SQLException;

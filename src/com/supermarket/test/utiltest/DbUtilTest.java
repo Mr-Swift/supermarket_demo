@@ -1,4 +1,4 @@
-package com.supermarket.test;
+package com.supermarket.test.utiltest;
 
 import com.supermarket.util.DbUtil;
 

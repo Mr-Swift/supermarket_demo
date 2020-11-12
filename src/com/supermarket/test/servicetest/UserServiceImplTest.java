@@ -1,4 +1,4 @@
-package com.supermarket.test;
+package com.supermarket.test.servicetest;
 
 import com.supermarket.dao.IUserDao;
 import com.supermarket.entity.User;

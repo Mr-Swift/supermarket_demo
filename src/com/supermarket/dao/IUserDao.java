@@ -10,6 +10,7 @@ import java.util.Set;
 public interface IUserDao <T>{
     public T listUsers() throws SQLException;
     public T listByUserName(String userName) throws SQLException;
+    public T listById(int id) throws SQLException;
     public T insertUser(User user) throws SQLException;
     public T modifyById(User user) throws SQLException;
     public T deleteById(Set setOfId) throws SQLException;

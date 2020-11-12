@@ -53,6 +53,23 @@ public class UserServiceImpl implements IUserService {
     }
 
     @Override
+    public Object listById(int id) {
+        List<User> list =null;
+        try {
+            list = (List<User>) iUserDao.listById(id);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }finally{
+            try {
+                DbUtil.closeConnection();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return list;
+    }
+
+    @Override
     public Object insertUser(User user) throws SQLException {
         int result=-1;
         try {

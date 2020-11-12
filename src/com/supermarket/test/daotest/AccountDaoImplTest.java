@@ -1,4 +1,4 @@
-package com.supermarket.test;
+package com.supermarket.test.daotest;
 
 import com.supermarket.dao.IAccountDao;
 import com.supermarket.dao.impl.AccountDaoImpl;
@@ -15,6 +15,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class AccountDaoImplTest {
 
+    IAccountDao iAccountDao = new AccountDaoImpl();
     @BeforeEach
     void setUp() {
     }
@@ -25,11 +26,11 @@ class AccountDaoImplTest {
 
     @Test
     void listAccounts() {
-        IAccountDao iAccountDao=new AccountDaoImpl();
+        IAccountDao iAccountDao = new AccountDaoImpl();
         try {
-            List list= (List) iAccountDao.listAccounts();
-            for(Object obj:list){
-                Account account= (Account) obj;
+            List list = (List) iAccountDao.listAccounts();
+            for (Object obj : list) {
+                Account account = (Account) obj;
                 System.out.println(account);
             }
         } catch (SQLException throwables) {
@@ -46,7 +47,9 @@ class AccountDaoImplTest {
     }
 
     @Test
-    void insertAccount() {
+    void insertAccount() throws SQLException {
+        Account account=new Account("mac mini",1,6999,"是","苹果中国","牛","2020-11-11");
+        iAccountDao.insertAccount(account);
     }
 
     @Test
@@ -56,4 +59,11 @@ class AccountDaoImplTest {
     @Test
     void deleteByID() {
     }
+
+    @Test
+    void getCountsOfId() throws SQLException {
+        IAccountDao iAccountDao = new AccountDaoImpl();
+        System.out.println(iAccountDao.getCountsOfId());
+    }
+
 }

@@ -55,6 +55,11 @@ public class AccountDaoImpl implements IAccountDao {
     }
 
     @Override
+    public Object listById(int id) throws SQLException {
+        return JdbcTemplate.executeQuery(getBasicQueryStr()+" where account_id=?",new AccountObjectMap(),id);
+    }
+
+    @Override
     public Object listByPay(String pay) throws SQLException {
         return JdbcTemplate.executeQuery(getBasicQueryStr()+" where pay_check=?",new AccountObjectMap(),pay);
     }
