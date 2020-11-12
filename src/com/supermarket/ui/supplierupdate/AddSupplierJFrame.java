@@ -181,8 +181,8 @@ public class AddSupplierJFrame extends JFrame implements Runnable{
         });
 
         /**创建线程，启动线程*/
-        Thread threadCheck_supplier =new Thread(this);
-        threadCheck_supplier.start();
+        Thread threadCheck_supplier_add =new Thread(this);
+        threadCheck_supplier_add.start();
         this.setVisible(true);
     }
 

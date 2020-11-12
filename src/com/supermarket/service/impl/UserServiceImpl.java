@@ -88,12 +88,15 @@ public class UserServiceImpl implements IUserService {
 
     @Override
     public Object modifyById(User user) throws SQLException {
-        int result=-1;
+        int result = -1;
         try {
-            result = (int) modifyById(user);
+            itransaction.begin();
+            result = (int) iUserDao.modifyById(user);
+            itransaction.commit();
         } catch (SQLException e) {
             e.printStackTrace();
-        }finally{
+            itransaction.rollback();
+        } finally {
             try {
                 DbUtil.closeConnection();
             } catch (SQLException e) {

@@ -268,7 +268,6 @@ public class ModifyAccountJFrame extends JFrame implements Runnable{
         Thread threadCheck_account_modify =new Thread(this);
         threadCheck_account_modify.start();
 
-
         this.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
@@ -276,17 +275,12 @@ public class ModifyAccountJFrame extends JFrame implements Runnable{
             }
         });
         this.setVisible(true);
-
     }
 
     private void init(int id) {
         List<Account> list = (List<Account>) iAccountService.listById(id);
-
-
         for (Account account : list) {
-
             jTextField_nameinput.setText(account.getCommodity_name());
-            System.out.println("1");
             jTextField_numInput.setText(String.valueOf(account.getNum()));
             jTextField_priceInput.setText(String.valueOf(account.getPrice()));
             if (account.getPay_check().equals("是")) {
@@ -379,7 +373,8 @@ public class ModifyAccountJFrame extends JFrame implements Runnable{
                     /**预留*/
 //                jTextField_timeInput.setText("");
 //                jTextField_timeInput.setText(str);
-                    thread.stop();
+                    thread.interrupt();
+//                thread.stop();//不安全，已废弃
                     f.dispose();
                 }
             });

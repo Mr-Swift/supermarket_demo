@@ -339,7 +339,8 @@ public class TimeSelectGUI {
                 /**预留*/
 //                jTextField_timeInput.setText("");
 //                jTextField_timeInput.setText(str);
-                thread.stop();
+                thread.interrupt();
+//                thread.stop();//不安全，已废弃
                 f.dispose();
             }
         });

@@ -64,7 +64,7 @@ public class SupplierDaoImpl implements ISupplierDao {
 
     @Override
     public Object listById(int id) throws SQLException {
-        return JdbcTemplate.executeQuery(getBasicQueryStr()+" where supplier_id?",new SupplierObjectMap(),id);
+        return JdbcTemplate.executeQuery(getBasicQueryStr()+" where supplier_id=?",new SupplierObjectMap(),id);
     }
 
     @Override

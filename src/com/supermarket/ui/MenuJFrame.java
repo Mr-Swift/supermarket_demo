@@ -9,6 +9,7 @@ import com.supermarket.ui.combbox.ComBoBoxOfPayCheck;
 import com.supermarket.ui.jframeutil.CheckOfNull;
 import com.supermarket.ui.jframeutil.LoginToMenu;
 import com.supermarket.ui.supplierupdate.AddSupplierJFrame;
+import com.supermarket.ui.supplierupdate.ModifySupplierJFrame;
 import com.supermarket.ui.userupdate.AddUserJFrame;
 import com.supermarket.ui.userupdate.ModifyUserJFrame;
 import com.supermarket.util.FileActionUtil;
@@ -103,7 +104,7 @@ public class MenuJFrame extends JFrame implements Runnable{
         allPages_report_supplier=(allCounts_report_supplier-1)/pageSize+1;
     }
 
-    public MenuJFrame() throws SQLException {
+    public MenuJFrame(String userName,String authority) throws SQLException {
         //实现背景图片
         ImageIcon imageIcon=new ImageIcon("src/picture/MainFrame.png");
         JLabel jLabelImage=new JLabel(imageIcon);
@@ -164,24 +165,30 @@ public class MenuJFrame extends JFrame implements Runnable{
 //        }
 
 
-        if(LoginToMenu.map.containsKey("普通员工")){
+//        if(LoginToMenu.map.containsKey("普通员工")){
+//            jPanel_Left.add(jButton_bill);
+//            jPanel_Left.add(jButton_exit);
+//            userName= (String) LoginToMenu.map.get("普通员工");
+//        }else{
+//            jPanel_Left.add(jButton_bill);
+//            jPanel_Left.add(jButton_supplier);
+//            jPanel_Left.add(jButton_user);
+//            jPanel_Left.add(jButton_report);
+//            jPanel_Left.add(jButton_exit);
+//            userName= (String) LoginToMenu.map.get("部门经理");
+////            LoginToMenu.map.clear();
+//        }
+        if(authority.equals("普通员工")){
             jPanel_Left.add(jButton_bill);
             jPanel_Left.add(jButton_exit);
-            userName= (String) LoginToMenu.map.get("普通员工");
         }else{
             jPanel_Left.add(jButton_bill);
             jPanel_Left.add(jButton_supplier);
             jPanel_Left.add(jButton_user);
             jPanel_Left.add(jButton_report);
             jPanel_Left.add(jButton_exit);
-            userName= (String) LoginToMenu.map.get("部门经理");
 //            LoginToMenu.map.clear();
-
         }
-
-
-
-
 
 
         //菜单界面北区显示欢迎、系统时间
@@ -193,9 +200,6 @@ public class MenuJFrame extends JFrame implements Runnable{
         jLabelTime=new JLabel();
         jPanel_North.add(jLabelTime);
         new Thread(this).start();
-
-
-
 
         //----------------------------------------------------------------------------------------
         //卡片布局第一页（默认页）
@@ -240,8 +244,6 @@ public class MenuJFrame extends JFrame implements Runnable{
         jPanel_Bill_North.add(button_bill_search);
 
 
-
-
         //账单管理>>
         JPanel jPanel_Bill_button = new JPanel();
         //jPanel_Bill_button.setOpaque(false);
@@ -264,6 +266,95 @@ public class MenuJFrame extends JFrame implements Runnable{
         jButton_output.setBorderPainted(false);
 //        jButton_output.setForeground(Color.YELLOW);//设置按钮中字体颜色
         jPanel_Bill_button.add(jButton_output);
+
+        //增删改按钮
+        JButton jButton_bill_add=new JButton("添加数据");
+        JButton jButton_bill_modify=new JButton("修改数据");
+        JButton jButton_bill_delete=new JButton("删除数据");
+        jPanel_Bill_button.add(jButton_bill_add);
+        jPanel_Bill_button.add(jButton_bill_modify);
+        jPanel_Bill_button.add(jButton_bill_delete);
+
+        //table
+        JPanel jPanel_Bill_table=new JPanel();
+        jPanel_Bill_table.setLayout(new BorderLayout());
+        jPanel_Bill_table.setBackground(Color.YELLOW);
+        jPanel_Bill_table.setBounds(0,100,795,300);
+        jPanel_Bill.add(jPanel_Bill_table);
+
+        initPageParams_bill();
+        jTable_bill=new JTable(new BillTableModel(currentPage_bill,pageSize));
+        JScrollPane jScrollPane_bill=new JScrollPane(jTable_bill);
+        jPanel_Bill_table.add(jScrollPane_bill,BorderLayout.CENTER);
+
+        //页面切换按钮区
+        JPanel jPanel_Bill_pageArea=new JPanel();
+        jPanel_Bill_pageArea.setLayout(new FlowLayout(FlowLayout.CENTER));
+        jPanel_Bill_pageArea.setBounds(0,400,795,30);
+        jPanel_Bill_pageArea.setBackground(Color.PINK);
+        jPanel_Bill.add(jPanel_Bill_pageArea);
+
+        JButton jButton_Bill_headPage=new JButton("首页");
+        JButton jButton_Bill_endPage=new JButton("尾页");
+        JButton jButton_Bill_previousPage=new JButton("上一页");
+        JButton jButton_Bill_next=new JButton("下一页");
+        jLabelPageInfo_bill = new JLabel("一共有"+allPages_bill+"页数据,当前为"+currentPage_bill+"页");
+
+        /**订单管理--->添加数据按钮*/
+        jButton_bill_add.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    new AddAccountJFrame(jTable_bill);
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
+            }
+        });
+
+        /**订单管理--->修改数据按钮*/
+        jButton_bill_modify.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(jTable_bill.getSelectedRows().length>1){
+                    JOptionPane.showMessageDialog(MenuJFrame.this,"只能修改单行数据");
+                }else if(jTable_bill.getSelectedRow()==-1){
+                    JOptionPane.showMessageDialog(MenuJFrame.this,"请选中要修改的内容");
+                }else{
+                    int account_id_modify= (int) jTable_bill.getValueAt(jTable_bill.getSelectedRow(),0);
+                    try {
+                        new ModifyAccountJFrame(jTable_bill,account_id_modify);
+                    } catch (SQLException throwables) {
+                        throwables.printStackTrace();
+                    }
+
+                }
+            }
+        });
+
+        /**订单管理--->删除数据按钮*/
+        jButton_bill_delete.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(jTable_bill.getSelectedRow()==-1){
+                    JOptionPane.showMessageDialog(MenuJFrame.this,"请选中要修改的内容");
+                }else{
+                    int[] account_rows=jTable_bill.getSelectedRows();
+                    Set accountSet=new HashSet();
+                    for(Object obj:account_rows){
+                        accountSet.add(jTable_bill.getValueAt((Integer) obj,0));
+                    }
+                    try {
+                        iAccountService.deleteByID(accountSet);
+                        jTable_bill.setModel(new BillTableModel());
+                    } catch (SQLException throwables) {
+                        throwables.printStackTrace();
+                    }
+                }
+            }
+        });
+
+        /**订单管理--->导出按钮*/
         jButton_output.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -297,93 +388,7 @@ public class MenuJFrame extends JFrame implements Runnable{
             }
         });
 
-        //增删改按钮
-        JButton jButton_bill_add=new JButton("添加数据");
-        JButton jButton_bill_modify=new JButton("修改数据");
-        JButton jButton_bill_delete=new JButton("删除数据");
-        jPanel_Bill_button.add(jButton_bill_add);
-        jPanel_Bill_button.add(jButton_bill_modify);
-        jPanel_Bill_button.add(jButton_bill_delete);
-
-        jButton_bill_add.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                try {
-                    new AddAccountJFrame(jTable_bill);
-                } catch (SQLException throwables) {
-                    throwables.printStackTrace();
-                }
-            }
-        });
-
-
-
-        //table
-        JPanel jPanel_Bill_table=new JPanel();
-        jPanel_Bill_table.setLayout(new BorderLayout());
-        jPanel_Bill_table.setBackground(Color.YELLOW);
-        jPanel_Bill_table.setBounds(0,100,795,300);
-        jPanel_Bill.add(jPanel_Bill_table);
-
-        initPageParams_bill();
-        jTable_bill=new JTable(new BillTableModel(currentPage_bill,pageSize));
-        JScrollPane jScrollPane_bill=new JScrollPane(jTable_bill);
-        jPanel_Bill_table.add(jScrollPane_bill,BorderLayout.CENTER);
-
-        //页面切换按钮区
-        JPanel jPanel_Bill_pageArea=new JPanel();
-        jPanel_Bill_pageArea.setLayout(new FlowLayout(FlowLayout.CENTER));
-        jPanel_Bill_pageArea.setBounds(0,400,795,30);
-        jPanel_Bill_pageArea.setBackground(Color.PINK);
-        jPanel_Bill.add(jPanel_Bill_pageArea);
-
-        JButton jButton_Bill_headPage=new JButton("首页");
-        JButton jButton_Bill_endPage=new JButton("尾页");
-        JButton jButton_Bill_previousPage=new JButton("上一页");
-        JButton jButton_Bill_next=new JButton("下一页");
-        jLabelPageInfo_bill = new JLabel("一共有"+allPages_bill+"页数据,当前为"+currentPage_bill+"页");
-
-        jButton_bill_modify.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if(jTable_bill.getSelectedRows().length>1){
-                    JOptionPane.showMessageDialog(MenuJFrame.this,"只能修改单行数据");
-                }else if(jTable_bill.getSelectedRow()==-1){
-                    JOptionPane.showMessageDialog(MenuJFrame.this,"请选中要修改的内容");
-                }else{
-                    int account_id_modify= (int) jTable_bill.getValueAt(jTable_bill.getSelectedRow(),0);
-                    try {
-                        new ModifyAccountJFrame(jTable_bill,account_id_modify);
-                    } catch (SQLException throwables) {
-                        throwables.printStackTrace();
-                    }
-
-                }
-            }
-        });
-
-        jButton_bill_delete.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if(jTable_bill.getSelectedRow()==-1){
-                    JOptionPane.showMessageDialog(MenuJFrame.this,"请选中要修改的内容");
-                }else{
-                    int[] account_rows=jTable_bill.getSelectedRows();
-                    Set accountSet=new HashSet();
-                    for(Object obj:account_rows){
-                        accountSet.add(jTable_bill.getValueAt((Integer) obj,0));
-                    }
-                    try {
-                        iAccountService.deleteByID(accountSet);
-                        jTable_bill.setModel(new BillTableModel());
-                    } catch (SQLException throwables) {
-                        throwables.printStackTrace();
-                    }
-                }
-            }
-        });
-
-
+        /**订单管理--->点击商品名称搜索框则情况是否付款选择框*/
         jTextField_Bill_North.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -391,6 +396,7 @@ public class MenuJFrame extends JFrame implements Runnable{
             }
         });
 
+        /**订单管理--->点击是否付款选择框则情况商品名称输入框*/
         jComboBox_CheckOfPay.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -398,6 +404,7 @@ public class MenuJFrame extends JFrame implements Runnable{
             }
         });
 
+        /**订单管理--->搜索*/
         button_bill_search.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -490,6 +497,58 @@ public class MenuJFrame extends JFrame implements Runnable{
                 }
             }
         });
+
+        jTextField_Bill_North.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == 10) {
+                    if(new CheckOfNull().check(jTextField_Bill_North.getText()) && jComboBox_CheckOfPay.getSelectedIndex()!=0){
+                        /**进行是否付款查询*/
+                        try {
+                            jTable_bill.setModel(new BillTableModel((String) jComboBox_CheckOfPay.getSelectedItem()));
+                            jLabelPageInfo_bill.setText("");
+                        } catch (SQLException throwables) {
+                            throwables.printStackTrace();
+                        }
+                    }else if(!new CheckOfNull().check(jTextField_Bill_North.getText()) && jComboBox_CheckOfPay.getSelectedIndex()==0){
+                        /**进行商品名称查询*/
+                        try {
+                            jTable_bill.setModel(new BillTableModel(jTextField_Bill_North.getText(),jTextField_Bill_North.getText()));
+                            jLabelPageInfo_bill.setText("");
+                        } catch (SQLException throwables) {
+                            throwables.printStackTrace();
+                        }
+                        jLabelPageInfo_bill.setText("");
+                    }
+                }
+            }
+        });
+
+        jComboBox_CheckOfPay.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == 10) {
+                    if(new CheckOfNull().check(jTextField_Bill_North.getText()) && jComboBox_CheckOfPay.getSelectedIndex()!=0){
+                        /**进行是否付款查询*/
+                        try {
+                            jTable_bill.setModel(new BillTableModel((String) jComboBox_CheckOfPay.getSelectedItem()));
+                            jLabelPageInfo_bill.setText("");
+                        } catch (SQLException throwables) {
+                            throwables.printStackTrace();
+                        }
+                    }else if(!new CheckOfNull().check(jTextField_Bill_North.getText()) && jComboBox_CheckOfPay.getSelectedIndex()==0){
+                        /**进行商品名称查询*/
+                        try {
+                            jTable_bill.setModel(new BillTableModel(jTextField_Bill_North.getText(),jTextField_Bill_North.getText()));
+                            jLabelPageInfo_bill.setText("");
+                        } catch (SQLException throwables) {
+                            throwables.printStackTrace();
+                        }
+                        jLabelPageInfo_bill.setText("");
+                    }
+                }
+            }
+        });
         
         jPanel_Bill_pageArea.add(jButton_Bill_headPage);
         jPanel_Bill_pageArea.add(jButton_Bill_previousPage);
@@ -546,6 +605,7 @@ public class MenuJFrame extends JFrame implements Runnable{
         jPanel_Supplier_button.add(jButton_input);
 
 
+        /**供应商管理--->导入按钮*/
         jButton_input.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -573,8 +633,6 @@ public class MenuJFrame extends JFrame implements Runnable{
             }
         });
 
-
-
         //增删改按钮
         JButton jButton_supplier_add=new JButton("添加数据");
         JButton jButton_supplier_modify=new JButton("修改数据");
@@ -583,6 +641,7 @@ public class MenuJFrame extends JFrame implements Runnable{
         jPanel_Supplier_button.add(jButton_supplier_modify);
         jPanel_Supplier_button.add(jButton_supplier_delete);
 
+        /**供应商管理--->添加数据*/
         jButton_supplier_add.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -619,11 +678,45 @@ public class MenuJFrame extends JFrame implements Runnable{
         JButton jButton_Supplier_next=new JButton("下一页");
         jLabelPageInfo_supplier = new JLabel("一共有"+allPages_supplier+"页数据,当前为"+currentPage_supplier+"页");
 
+        /**供应商管理--->修改数据*/
         jButton_supplier_modify.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 /**测试预留*/
+                if(jTable_supplier.getSelectedRows().length>1){
+                    JOptionPane.showMessageDialog(MenuJFrame.this,"只能修改单行数据");
+                }else if(jTable_supplier.getSelectedRow()==-1){
+                    JOptionPane.showMessageDialog(MenuJFrame.this,"请选中要修改的内容");
+                }else{
+                    int supplier_id_modify= (int) jTable_supplier.getValueAt(jTable_supplier.getSelectedRow(),0);
+                    try {
+                        new ModifySupplierJFrame(jTable_supplier,supplier_id_modify);
+                    } catch (SQLException throwables) {
+                        throwables.printStackTrace();
+                    }
+                }
+            }
+        });
 
+        /**供应商管理--->删除数据*/
+        jButton_supplier_delete.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(jTable_supplier.getSelectedRow()==-1){
+                    JOptionPane.showMessageDialog(MenuJFrame.this,"请选中要修改的内容");
+                }else {
+                    int[] supplier_rows=jTable_supplier.getSelectedRows();
+                    Set supplierSet = new HashSet();
+                    for(Object obj:supplier_rows){
+                        supplierSet.add(jTable_supplier.getValueAt((Integer) obj,0));
+                    }
+                    try {
+                        iSupplierService.deleteSupplier(supplierSet);
+                        jTable_supplier.setModel(new SupplierTableModel());
+                    } catch (SQLException throwables) {
+                        throwables.printStackTrace();
+                    }
+                }
             }
         });
 
@@ -695,6 +788,7 @@ public class MenuJFrame extends JFrame implements Runnable{
             }
         });
 
+        /**供应商管理--->查询按钮*/
         jButton_Supplier_search.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -706,6 +800,22 @@ public class MenuJFrame extends JFrame implements Runnable{
                     throwables.printStackTrace();
                 }
                 jLabelPageInfo_supplier.setText("");
+            }
+        });
+
+        jTextField_Supplier_North.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == 10) {
+                    try {
+                        if(!CheckOfNull.check(jTextField_Supplier_North.getText()))
+                            jTable_supplier.setModel(new SupplierTableModel(jTextField_Supplier_North.getText()));
+                        jLabelPageInfo_supplier.setText("");
+                    } catch (SQLException throwables) {
+                        throwables.printStackTrace();
+                    }
+                    jLabelPageInfo_supplier.setText("");
+                }
             }
         });
 
@@ -759,16 +869,7 @@ public class MenuJFrame extends JFrame implements Runnable{
         jPanel_user_button.add(jButton_user_modify);
         jPanel_user_button.add(jButton_user_delete);
 
-        jButton_user_add.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                try {
-                    new AddUserJFrame(jTable_user);
-                } catch (SQLException throwables) {
-                    throwables.printStackTrace();
-                }
-            }
-        });
+
 
         /**table*/
         JPanel jPanel_user_table=new JPanel();
@@ -795,6 +896,64 @@ public class MenuJFrame extends JFrame implements Runnable{
         JButton jButton_user_next=new JButton("下一页");
         jLabelPageInfo_user = new JLabel("一共有"+allPages_user+"页数据,当前为"+currentPage_user+"页");
 
+
+        /**用户管理--->添加数据按钮*/
+        jButton_user_add.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    new AddUserJFrame(jTable_user);
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
+            }
+        });
+
+
+        /**用户管理--->修改数据按钮*/
+        jButton_user_modify.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(jTable_user.getSelectedRows().length>1){
+                    JOptionPane.showMessageDialog(MenuJFrame.this,"只能修改单行数据");
+                } else if (jTable_user.getSelectedRow() == -1) {
+                    JOptionPane.showMessageDialog(MenuJFrame.this, "请选中要修改的内容");
+                } else {
+                    int user_id_modify = (int) jTable_user.getValueAt(jTable_user.getSelectedRow(), 0);
+                    try {
+                        new ModifyUserJFrame(jTable_user, user_id_modify);
+                    } catch (SQLException throwables) {
+                        throwables.printStackTrace();
+                    }
+                }
+            }
+        });
+
+        /**用户管理--->删除数据按钮*/
+        jButton_user_delete.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (jTable_user.getSelectedRow() == -1) {
+                    JOptionPane.showMessageDialog(MenuJFrame.this,"请选中要修改的内容");
+                }else{
+                    int[] user_rows = jTable_user.getSelectedRows();
+                    Set userSet = new HashSet();
+                    for (Object obj : user_rows) {
+                        if(jTable_user.getValueAt((Integer) obj,1).equals(userName)){
+                            JOptionPane.showMessageDialog(MenuJFrame.this,"您不能删除当前登陆的用户！");
+                        }
+                        userSet.add(jTable_user.getValueAt((Integer) obj, 0));
+                    }
+                    try {
+                        iUserService.deleteById(userSet);
+                        jTable_user.setModel(new UserTableModel());
+                    } catch (SQLException throwables) {
+                        throwables.printStackTrace();
+                    }
+
+                }
+            }
+        });
 
         /**首页*/
         jButton_user_headPage.addActionListener(new ActionListener() {
@@ -864,6 +1023,7 @@ public class MenuJFrame extends JFrame implements Runnable{
             }
         });
 
+        /**用户管理--->查询按钮*/
         jButton_user_search.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -876,6 +1036,22 @@ public class MenuJFrame extends JFrame implements Runnable{
                     throwables.printStackTrace();
                 }
 
+            }
+        });
+
+        jTextField_user_north.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == 10) {
+                    try {
+                        if(!CheckOfNull.check(jTextField_user_north.getText())) {
+                            jTable_user.setModel(new UserTableModel(jTextField_user_north.getText()));
+                            jLabelPageInfo_user.setText("");
+                        }
+                    } catch (SQLException throwables) {
+                        throwables.printStackTrace();
+                    }
+                }
             }
         });
 
@@ -1215,10 +1391,6 @@ public class MenuJFrame extends JFrame implements Runnable{
 //        });
         this.setResizable(false);
         this.setVisible(true);
-    }
-
-    public static void main(String[] args) throws SQLException {
-        new MenuJFrame();
     }
 
     @Override

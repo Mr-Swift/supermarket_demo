@@ -35,6 +35,13 @@ class SupplierServiceImplTest {
     }
 
     @Test
+    void listById(){
+        List list= (List) iSupplierService.listById(8);
+        System.out.println(list);
+
+    }
+
+    @Test
     void listSupplierNames() throws SQLException {
         List nameList= (List) iSupplierService.listSupplierNames();
         for(Object obj:nameList){

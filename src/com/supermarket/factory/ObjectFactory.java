@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 @SuppressWarnings("all")
-
 public class ObjectFactory {
     private final static Map<String,Object> OBJECT_MAP=new HashMap<>();
     static{

@@ -20,10 +20,10 @@ public class AddUserJFrame extends JFrame implements Runnable{
     JTextField jTextField_nameinput=null;
 
     JLabel jLabel_star_password=null;
-    JTextField jTextField_password=null;
+    JPasswordField jPasswordField_password=null;
 
     JLabel jLabel_star_confirm=null;
-    JTextField jTextField_confirm=null;
+    JPasswordField jPasswordField_confirm=null;
 
     JLabel jLabel_star_sex=null;
     JComboBox jcomboBox_sex=null;
@@ -82,9 +82,9 @@ public class AddUserJFrame extends JFrame implements Runnable{
         jLabel_password.setBounds(60,85,80,20);
         jPanel.add(jLabel_password);
 
-        jTextField_password=new JTextField();
-        jTextField_password.setBounds(140,81,250,30);
-        jPanel.add(jTextField_password);
+        jPasswordField_password=new JPasswordField();
+        jPasswordField_password.setBounds(140,81,250,30);
+        jPanel.add(jPasswordField_password);
 
         //----------------------------------------------------------
         jLabel_star_confirm=new JLabel("*");
@@ -97,9 +97,9 @@ public class AddUserJFrame extends JFrame implements Runnable{
         jLabel_confirm.setBounds(60,135,80,20);
         jPanel.add(jLabel_confirm);
 
-        jTextField_confirm=new JTextField();
-        jTextField_confirm.setBounds(140,131,250,30);
-        jPanel.add(jTextField_confirm);
+        jPasswordField_confirm=new JPasswordField();
+        jPasswordField_confirm.setBounds(140,131,250,30);
+        jPanel.add(jPasswordField_confirm);
 
         //----------------------------------------------------------
         jLabel_star_sex=new JLabel("*");
@@ -196,11 +196,11 @@ public class AddUserJFrame extends JFrame implements Runnable{
 
                 if(new CheckOfNull().check(jTextField_nameinput.getText())){
                     JOptionPane.showMessageDialog(AddUserJFrame.this,"用户名称不可为空!");
-                }else if(CheckOfNull.check(jTextField_password.getText())){
+                }else if(CheckOfNull.check(String.valueOf(jPasswordField_password.getPassword()))){
                     JOptionPane.showMessageDialog(AddUserJFrame.this,"用户密码不可为空!");
-                }else if(CheckOfNull.check(jTextField_confirm.getText())){
+                }else if(CheckOfNull.check(String.valueOf(jPasswordField_confirm.getPassword()))){
                     JOptionPane.showMessageDialog(AddUserJFrame.this,"确认密码不可为空!");
-                }else if(!jTextField_confirm.getText().equals(jTextField_password.getText())){
+                }else if(!String.valueOf(jPasswordField_confirm.getPassword()).equals(String.valueOf(jPasswordField_password.getPassword()))){
                     JOptionPane.showMessageDialog(AddUserJFrame.this,"两次输入的密码不一致!");
                 }else if(jcomboBox_sex.getSelectedItem().equals("请选择")){
                     JOptionPane.showMessageDialog(AddUserJFrame.this,"请选择用户性别!");
@@ -240,7 +240,6 @@ public class AddUserJFrame extends JFrame implements Runnable{
             }
         });
 
-
         this.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
@@ -248,16 +247,15 @@ public class AddUserJFrame extends JFrame implements Runnable{
             }
         });
 
-        Thread threadCheck_user=new Thread(this);
-        threadCheck_user.start();
-        System.out.println("start");
+        Thread threadCheck_user_add=new Thread(this);
+        threadCheck_user_add.start();
         this.setVisible(true);
     }
 
     private boolean insertUser() throws SQLException {
         User user=new User();
         user.setUser_name(jTextField_nameinput.getText());
-        user.setPassword(jTextField_password.getText());
+        user.setPassword(String.valueOf(jPasswordField_password.getPassword()));
         user.setSex((String) jcomboBox_sex.getSelectedItem());
         user.setAge(Integer.parseInt(jTextField_age.getText()));
         user.setUser_telphone(jTextField_telphone.getText());
@@ -283,13 +281,13 @@ public class AddUserJFrame extends JFrame implements Runnable{
                 jLabel_star_name.setVisible(false);
             }
 
-            if(CheckOfNull.check(jTextField_password.getText())){
+            if(CheckOfNull.check(String.valueOf(jPasswordField_password.getPassword()))){
                 jLabel_star_password.setVisible(true);
             }else{
                 jLabel_star_password.setVisible(false);
             }
 
-            if(CheckOfNull.check(jTextField_confirm.getText())){
+            if(CheckOfNull.check(String.valueOf(jPasswordField_confirm.getPassword()))){
                 jLabel_star_confirm.setVisible(true);
             }else{
                 jLabel_star_confirm.setVisible(false);

@@ -118,11 +118,11 @@ public class LoginJFrame extends JFrame {
                     JOptionPane.showMessageDialog(LoginJFrame.this,"身份不正确!");
                 }else{
                     LoginToMenu.map.put(loginAuthority, loginName);
-//                    try {
-//                        new MenuJFrame();
-//                    } catch (SQLException throwables) {
-//                        throwables.printStackTrace();
-//                    }
+                    try {
+                        new MenuJFrame(loginName,loginAuthority);
+                    } catch (SQLException throwables) {
+                        throwables.printStackTrace();
+                    }
                     dispose();
                 }
             }
@@ -163,11 +163,11 @@ public class LoginJFrame extends JFrame {
                         JOptionPane.showMessageDialog(LoginJFrame.this, "身份不正确!");
                     } else {
                         LoginToMenu.map.put(loginAuthority, loginName);
-//                        try {
-//                            new MenuJFrame();
-//                        } catch (SQLException throwables) {
-//                            throwables.printStackTrace();
-//                        }
+                        try {
+                            new MenuJFrame(loginName,loginAuthority);
+                        } catch (SQLException throwables) {
+                            throwables.printStackTrace();
+                        }
                         dispose();
                     }
                 }
@@ -209,11 +209,11 @@ public class LoginJFrame extends JFrame {
                     JOptionPane.showMessageDialog(LoginJFrame.this, "身份不正确!");
                 } else {
                     LoginToMenu.map.put(loginAuthority, loginName);
-//                    try {
-//                        new MenuJFrame();
-//                    } catch (SQLException throwables) {
-//                        throwables.printStackTrace();
-//                    }
+                    try {
+                        new MenuJFrame(loginName,loginAuthority);
+                    } catch (SQLException throwables) {
+                        throwables.printStackTrace();
+                    }
                     dispose();
                 }
             }
@@ -256,11 +256,11 @@ public class LoginJFrame extends JFrame {
                         JOptionPane.showMessageDialog(LoginJFrame.this,"身份不正确!");
                     }else{
                         LoginToMenu.map.put(loginAuthority, loginName);
-//                        try {
-//                            new MenuJFrame();
-//                        } catch (SQLException throwables) {
-//                            throwables.printStackTrace();
-//                        }
+                        try {
+                            new MenuJFrame(loginName,loginAuthority);
+                        } catch (SQLException throwables) {
+                            throwables.printStackTrace();
+                        }
                         dispose();
                     }
                 }
