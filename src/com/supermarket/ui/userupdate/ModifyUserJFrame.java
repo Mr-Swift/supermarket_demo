@@ -201,7 +201,9 @@ public class ModifyUserJFrame extends JFrame implements Runnable{
 
                 if(new CheckOfNull().check(jTextField_nameinput.getText())){
                     JOptionPane.showMessageDialog(ModifyUserJFrame.this,"用户名称不可为空!");
-                }else if(CheckOfNull.check(String.valueOf(jPassword_password.getPassword()))){
+                }else if(jTextField_nameinput.getText().equals("MASTER")){
+                    JOptionPane.showMessageDialog(ModifyUserJFrame.this,"你无权使用这个用户名!");
+                } else if(CheckOfNull.check(String.valueOf(jPassword_password.getPassword()))){
                     JOptionPane.showMessageDialog(ModifyUserJFrame.this,"用户密码不可为空!");
                 }else if(CheckOfNull.check(String.valueOf(jPassword_confirm.getPassword()))){
                     JOptionPane.showMessageDialog(ModifyUserJFrame.this,"确认密码不可为空!");

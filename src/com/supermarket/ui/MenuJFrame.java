@@ -424,7 +424,14 @@ public class MenuJFrame extends JFrame implements Runnable{
                     } catch (SQLException throwables) {
                         throwables.printStackTrace();
                     }
-                    jLabelPageInfo_bill.setText("");
+//                    jLabelPageInfo_bill.setText("");
+                }else{
+                    try {
+                        jTable_bill.setModel(new BillTableModel());
+                        jLabelPageInfo_bill.setText("");
+                    } catch (SQLException throwables) {
+                        throwables.printStackTrace();
+                    }
                 }
             }
         });
@@ -518,7 +525,14 @@ public class MenuJFrame extends JFrame implements Runnable{
                         } catch (SQLException throwables) {
                             throwables.printStackTrace();
                         }
-                        jLabelPageInfo_bill.setText("");
+//                        jLabelPageInfo_bill.setText("");
+                    }else{
+                        try {
+                            jTable_bill.setModel(new BillTableModel());
+                            jLabelPageInfo_bill.setText("");
+                        } catch (SQLException throwables) {
+                            throwables.printStackTrace();
+                        }
                     }
                 }
             }
@@ -544,7 +558,14 @@ public class MenuJFrame extends JFrame implements Runnable{
                         } catch (SQLException throwables) {
                             throwables.printStackTrace();
                         }
-                        jLabelPageInfo_bill.setText("");
+//                        jLabelPageInfo_bill.setText("");
+                    }else{
+                        try {
+                            jTable_bill.setModel(new BillTableModel());
+                            jLabelPageInfo_bill.setText("");
+                        } catch (SQLException throwables) {
+                            throwables.printStackTrace();
+                        }
                     }
                 }
             }
@@ -793,13 +814,16 @@ public class MenuJFrame extends JFrame implements Runnable{
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    if(!CheckOfNull.check(jTextField_Supplier_North.getText()))
-                    jTable_supplier.setModel(new SupplierTableModel(jTextField_Supplier_North.getText()));
+                    if (!CheckOfNull.check(jTextField_Supplier_North.getText())) {
+                        jTable_supplier.setModel(new SupplierTableModel(jTextField_Supplier_North.getText()));
+                    }else{
+                        jTable_supplier.setModel(new BillTableModel());
+                    }
                     jLabelPageInfo_supplier.setText("");
                 } catch (SQLException throwables) {
                     throwables.printStackTrace();
                 }
-                jLabelPageInfo_supplier.setText("");
+//                jLabelPageInfo_supplier.setText("");
             }
         });
 
@@ -808,13 +832,16 @@ public class MenuJFrame extends JFrame implements Runnable{
             public void keyPressed(KeyEvent e) {
                 if (e.getKeyCode() == 10) {
                     try {
-                        if(!CheckOfNull.check(jTextField_Supplier_North.getText()))
+                        if(!CheckOfNull.check(jTextField_Supplier_North.getText())) {
                             jTable_supplier.setModel(new SupplierTableModel(jTextField_Supplier_North.getText()));
+                        }else{
+                            jTable_supplier.setModel(new BillTableModel());
+                        }
                         jLabelPageInfo_supplier.setText("");
                     } catch (SQLException throwables) {
                         throwables.printStackTrace();
                     }
-                    jLabelPageInfo_supplier.setText("");
+//                    jLabelPageInfo_supplier.setText("");
                 }
             }
         });
@@ -939,9 +966,15 @@ public class MenuJFrame extends JFrame implements Runnable{
                     int[] user_rows = jTable_user.getSelectedRows();
                     Set userSet = new HashSet();
                     for (Object obj : user_rows) {
-                        if(jTable_user.getValueAt((Integer) obj,1).equals(userName)){
-                            JOptionPane.showMessageDialog(MenuJFrame.this,"您不能删除当前登陆的用户！");
-                            continue;
+                        if(!authority.equals("MASTER")) {
+                            if(jTable_user.getValueAt((Integer) obj,6).equals("部门经理")){
+                                if (jTable_user.getValueAt((Integer) obj, 1).equals(userName)) {
+                                    JOptionPane.showMessageDialog(MenuJFrame.this, "您不能删除当前登陆的用户！");
+                                }else{
+                                    JOptionPane.showMessageDialog(MenuJFrame.this, "您不能删除其他部门经理！");
+                                }
+                                continue;
+                            }
                         }
                         userSet.add(jTable_user.getValueAt((Integer) obj, 0));
                     }
@@ -1031,8 +1064,10 @@ public class MenuJFrame extends JFrame implements Runnable{
                 try {
                     if(!CheckOfNull.check(jTextField_user_north.getText())) {
                         jTable_user.setModel(new UserTableModel(jTextField_user_north.getText()));
-                        jLabelPageInfo_user.setText("");
+                    }else{
+                        jTable_user.setModel(new UserTableModel());
                     }
+                    jLabelPageInfo_user.setText("");
                 } catch (SQLException throwables) {
                     throwables.printStackTrace();
                 }
@@ -1047,8 +1082,10 @@ public class MenuJFrame extends JFrame implements Runnable{
                     try {
                         if(!CheckOfNull.check(jTextField_user_north.getText())) {
                             jTable_user.setModel(new UserTableModel(jTextField_user_north.getText()));
-                            jLabelPageInfo_user.setText("");
+                        }else{
+                            jTable_user.setModel(new UserTableModel());
                         }
+                        jLabelPageInfo_user.setText("");
                     } catch (SQLException throwables) {
                         throwables.printStackTrace();
                     }
