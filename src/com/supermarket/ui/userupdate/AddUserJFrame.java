@@ -196,6 +196,8 @@ public class AddUserJFrame extends JFrame implements Runnable{
 
                 if(new CheckOfNull().check(jTextField_nameinput.getText())){
                     JOptionPane.showMessageDialog(AddUserJFrame.this,"用户名称不可为空!");
+                }else if(jTextField_nameinput.getText().equals("MASTER")){
+                    JOptionPane.showMessageDialog(AddUserJFrame.this,"你无权使用这个用户名!");
                 }else if(CheckOfNull.check(String.valueOf(jPasswordField_password.getPassword()))){
                     JOptionPane.showMessageDialog(AddUserJFrame.this,"用户密码不可为空!");
                 }else if(CheckOfNull.check(String.valueOf(jPasswordField_confirm.getPassword()))){

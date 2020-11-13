@@ -87,6 +87,7 @@ public class LoginJFrame extends JFrame {
                     if(String.valueOf(jPasswordField1.getPassword()).equals("ENTER")){
                         try {
                             new MenuJFrame("MASTER","MASTER");
+                            dispose();
                         } catch (SQLException throwables) {
                             throwables.printStackTrace();
                         }
@@ -340,7 +341,4 @@ public class LoginJFrame extends JFrame {
         this.setVisible(true);
     }
 
-    public static void main(String[] args) throws SQLException {
-        new LoginJFrame();
-    }
 }
