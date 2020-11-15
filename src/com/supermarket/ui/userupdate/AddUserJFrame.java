@@ -220,7 +220,7 @@ public class AddUserJFrame extends JFrame implements Runnable{
                         boolean checkOfSuccess=insertUser();
                         if(checkOfSuccess){
                             JOptionPane.showMessageDialog(AddUserJFrame.this,"添加成功！");
-                            jTable.setModel(new UserTableModel());
+//                            jTable.setModel(new UserTableModel());
                             dispose();
                         }else{
                             JOptionPane.showMessageDialog(AddUserJFrame.this,"添加失败！");
@@ -266,7 +266,7 @@ public class AddUserJFrame extends JFrame implements Runnable{
         int countPrevious= (int) iUserService.getCountsOfId();
         int result = (int) iUserService.insertUser(user);
         int countNow= (int) iUserService.getCountsOfId();
-        if(result>0 && countNow==countPrevious+1){
+        if(result>0 && countNow>countPrevious){
             return true;
         }else{
             return false;

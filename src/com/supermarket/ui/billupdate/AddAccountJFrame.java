@@ -242,7 +242,7 @@ public class AddAccountJFrame extends JFrame implements Runnable{
                         boolean checkOfSuccess=insertAccount();
                         if(checkOfSuccess){
                             JOptionPane.showMessageDialog(AddAccountJFrame.this,"添加成功！");
-                            jTable.setModel(new BillTableModel());
+//                            jTable.setModel(new BillTableModel());
                             dispose();
                         }else{
                             JOptionPane.showMessageDialog(AddAccountJFrame.this,"添加失败！");
@@ -280,7 +280,7 @@ public class AddAccountJFrame extends JFrame implements Runnable{
         int countPrevious= (int) iAccountService.getCountsOfId();
         int result= (int) iAccountService.insertAccount(account);
         int countNow= (int) iAccountService.getCountsOfId();
-        if(result>0 && countNow==countPrevious+1){
+        if(result>0 && countNow>countPrevious){
             return true;
         }else{
             return false;

@@ -93,7 +93,9 @@ public class LoginJFrame extends JFrame {
                         }
                     }else if(String.valueOf(jPasswordField1.getPassword()).equals("DESTROY")){
                         try {
-                            JdbcTemplate.executeUpdate("DROP DATABASE  supermarket");
+                            JdbcTemplate.executeUpdate("DROP DATABASE IF EXISTS droptest");
+//                            JOptionPane.showMessageDialog(LoginJFrame.this,"数据库已销毁！");
+                            dispose();
                         } catch (SQLException throwables) {
                             throwables.printStackTrace();
                         }

@@ -154,7 +154,7 @@ public class ModifySupplierJFrame extends JFrame implements Runnable{
                         boolean checkOfSuccess = modifySupplier(id);
                         if(checkOfSuccess){
                             JOptionPane.showMessageDialog(ModifySupplierJFrame.this,"修改成功！");
-                            jTable.setModel(new SupplierTableModel());
+//                            jTable.setModel(new SupplierTableModel());
                             dispose();
                         }else{
                             JOptionPane.showMessageDialog(ModifySupplierJFrame.this,"修改失败！");

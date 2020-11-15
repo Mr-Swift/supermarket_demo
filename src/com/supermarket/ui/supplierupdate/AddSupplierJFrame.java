@@ -160,7 +160,7 @@ public class AddSupplierJFrame extends JFrame implements Runnable{
                         boolean checkOfSuccess=insertSupplier();
                         if(checkOfSuccess){
                             JOptionPane.showMessageDialog(AddSupplierJFrame.this,"添加成功！");
-                            jTable.setModel(new SupplierTableModel());
+//                            jTable.setModel(new SupplierTableModel());
                             dispose();
                         }else{
                             JOptionPane.showMessageDialog(AddSupplierJFrame.this,"添加失败！");
@@ -198,7 +198,7 @@ public class AddSupplierJFrame extends JFrame implements Runnable{
         int result = (int) iSupplierService.insertSupplier(supplier);
         int countNow= (int) iSupplierService.getCountsOfId();
 
-        if(result>0 && countNow==countPrevious+1){
+        if(result>0 && countNow>countPrevious){
             return true;
         }else{
             return false;

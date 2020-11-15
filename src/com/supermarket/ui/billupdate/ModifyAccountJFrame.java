@@ -234,7 +234,7 @@ public class ModifyAccountJFrame extends JFrame implements Runnable{
                         boolean checkOfSuccess=modifyAccount(id_modify);
                         if(checkOfSuccess){
                             JOptionPane.showMessageDialog(ModifyAccountJFrame.this,"修改成功！");
-                            jTable.setModel(new BillTableModel());
+//                            jTable.setModel(new BillTableModel());
                             dispose();
                         }else{
                             JOptionPane.showMessageDialog(ModifyAccountJFrame.this,"修改失败！");

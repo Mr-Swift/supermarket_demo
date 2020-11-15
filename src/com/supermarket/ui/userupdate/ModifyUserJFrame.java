@@ -225,7 +225,7 @@ public class ModifyUserJFrame extends JFrame implements Runnable{
                         boolean checkOfSuccess=modifyUser(id_modify);
                         if(checkOfSuccess){
                             JOptionPane.showMessageDialog(ModifyUserJFrame.this,"修改成功！");
-                            jTable.setModel(new UserTableModel());
+//                            jTable.setModel(new UserTableModel());
                             dispose();
                         }else{
                             JOptionPane.showMessageDialog(ModifyUserJFrame.this,"修改失败！");
