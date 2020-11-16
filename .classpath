@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry exported="true" kind="var" path="USER_HOME/Desktop/jar/commons-dbcp-1.4.jar"/>
+	<classpathentry exported="true" kind="var" path="USER_HOME/Desktop/jar/commons-pool-1.5.5.jar"/>
+	<classpathentry exported="true" kind="var" path="USER_HOME/Desktop/jar/mysql-connector-java-8.0.22.jar"/>
+	<classpathentry exported="true" kind="var" path="USER_HOME/Desktop/jar/获取时间组件jar包/datepicker.jar" sourcepath="/USER_HOME/Desktop/jar/获取时间组件jar包/datepicker.jar"/>
+	<classpathentry exported="true" kind="var" path="USER_HOME/Desktop/jar/获取时间组件jar包/swingx-core-1.6.2.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/junit-jupiter-5.4.2.jar"/>
+	<classpathentry kind="lib" path="lib/junit-jupiter-5.4.2.jar"/>
+	<classpathentry kind="output" path="out/production/超市账单管理系统"/>
+</classpath>
