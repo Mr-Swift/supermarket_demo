@@ -107,7 +107,8 @@ public class MenuJFrame extends JFrame implements Runnable{
 
     public MenuJFrame(String userName,String authority) throws SQLException {
         //实现背景图片
-        ImageIcon imageIcon=new ImageIcon("src/picture/MainFrame.png");
+//        ImageIcon imageIcon=new ImageIcon("src/picture/MainFrame.png");
+        ImageIcon imageIcon=new ImageIcon("src/picture/menu_new .jpg");
         JLabel jLabelImage=new JLabel(imageIcon);
         int x = imageIcon.getIconWidth();
         int y = imageIcon.getIconHeight();
@@ -127,6 +128,8 @@ public class MenuJFrame extends JFrame implements Runnable{
         ImageIcon imageIcon_user=new ImageIcon("src/picture/btn_users.gif");
         ImageIcon imageIcon_report=new ImageIcon("src/picture/btn_reports.gif");
         ImageIcon imageIcon_exit=new ImageIcon("src/picture/btn_exit.gif");
+
+
 
         JButton jButton_bill=new JButton(imageIcon_bill);
         JButton jButton_supplier=new JButton(imageIcon_supplier);
@@ -268,6 +271,7 @@ public class MenuJFrame extends JFrame implements Runnable{
 //        jButton_output.setForeground(Color.YELLOW);//设置按钮中字体颜色
         jPanel_Bill_button.add(jButton_output);
 
+
         //增删改按钮
         JButton jButton_bill_add=new JButton("添加数据");
         JButton jButton_bill_modify=new JButton("修改数据");
@@ -275,6 +279,11 @@ public class MenuJFrame extends JFrame implements Runnable{
         jPanel_Bill_button.add(jButton_bill_add);
         jPanel_Bill_button.add(jButton_bill_modify);
         jPanel_Bill_button.add(jButton_bill_delete);
+
+//        System.out.println(button_bill_search.getPreferredSize());
+//        System.out.println(jButton_output.getPreferredSize());
+//        System.out.println(jButton_bill_add.getPreferredSize());
+//        System.out.println(jButton_bill_modify.getPreferredSize());
 
         //table
         JPanel jPanel_Bill_table=new JPanel();

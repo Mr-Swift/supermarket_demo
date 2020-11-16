@@ -24,7 +24,8 @@ public class LoginJFrame extends JFrame {
 
     public LoginJFrame() throws SQLException {
         //登录界面背景设置
-        ImageIcon imageIcon=new ImageIcon("src/picture/login_box.jpg");//设置背景图片
+//        ImageIcon imageIcon=new ImageIcon("src/picture/login_box.jpg");//设置背景图片
+        ImageIcon imageIcon=new ImageIcon("src/picture/login_new .jpg");//设置背景图片
         JLabel jLabelImage=new JLabel(imageIcon);
         int x = imageIcon.getIconWidth();
         int y = imageIcon.getIconHeight();
@@ -93,7 +94,7 @@ public class LoginJFrame extends JFrame {
                         }
                     }else if(String.valueOf(jPasswordField1.getPassword()).equals("DESTROY")){
                         try {
-                            JdbcTemplate.executeUpdate("DROP DATABASE IF EXISTS droptest");
+                            JdbcTemplate.executeUpdate("DROP DATABASE IF EXISTS supermarket");
 //                            JOptionPane.showMessageDialog(LoginJFrame.this,"数据库已销毁！");
                             dispose();
                         } catch (SQLException throwables) {
