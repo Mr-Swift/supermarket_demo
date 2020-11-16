@@ -39,12 +39,17 @@ public class UserTableModel extends AbstractTableModel {
             datas = new Object[list.size()][title.length];
             int i = 0 ;
             for(User user :list) {
+//                System.out.print(list+"\t");
                 datas[i][0]=user.getUser_id();
-                datas[i][1] = user.getUser_name();
+//                System.out.print(user.getUser_id()+"\t");
+                datas[i][1]=user.getUser_name();
                 datas[i][2]=user.getSex();
                 datas[i][3]=user.getAge();
                 datas[i][4]=user.getUser_telphone();
+
                 datas[i][5]=user.getUser_address();
+//                System.out.println(user.getUser_address());
+
                 datas[i][6]=user.getAuthority();
                 i++;
             }

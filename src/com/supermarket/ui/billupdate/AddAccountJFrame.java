@@ -183,9 +183,10 @@ public class AddAccountJFrame extends JFrame implements Runnable{
             }
         });
         /**
+         *
          * 按钮绑定
          *
-         *  */
+         **/
 
         /**双击"交易时间弹出图形化获取日期界面"*/
         jLabel_timeInput.addMouseListener(new MouseAdapter() {
@@ -242,7 +243,6 @@ public class AddAccountJFrame extends JFrame implements Runnable{
                         boolean checkOfSuccess=insertAccount();
                         if(checkOfSuccess){
                             JOptionPane.showMessageDialog(AddAccountJFrame.this,"添加成功！");
-//                            jTable.setModel(new BillTableModel());
                             dispose();
                         }else{
                             JOptionPane.showMessageDialog(AddAccountJFrame.this,"添加失败！");
@@ -440,5 +440,4 @@ public class TimeSelectGUI {
             }
         }
     }
-
 }

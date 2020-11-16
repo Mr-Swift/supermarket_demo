@@ -5,6 +5,7 @@ import com.supermarket.factory.ObjectFactory;
 import com.supermarket.service.ISupplierService;
 import com.supermarket.tmodel.SupplierTableModel;
 import com.supermarket.ui.jframeutil.CheckOfNull;
+import com.supermarket.ui.jframeutil.CheckOfPhone;
 
 import javax.swing.*;
 import java.awt.*;
@@ -153,14 +154,16 @@ public class AddSupplierJFrame extends JFrame implements Runnable{
                     JOptionPane.showMessageDialog(AddSupplierJFrame.this,"联系人不可为空！");
                 }else if(CheckOfNull.check(jTextField_telphone.getText())){
                     JOptionPane.showMessageDialog(AddSupplierJFrame.this,"供应商电话不可为空！");
-                }else if(CheckOfNull.check(jTextField_address.getText())){
+                }else if(!CheckOfPhone.checkPhone(jTextField_telphone.getText().trim())){
+                    JOptionPane.showMessageDialog(AddSupplierJFrame.this,"电话号码格式不正确！");
+                } else if(CheckOfNull.check(jTextField_address.getText())){
                     JOptionPane.showMessageDialog(AddSupplierJFrame.this,"供应商地址不可为空！");
                 }else{
                     try {
                         boolean checkOfSuccess=insertSupplier();
                         if(checkOfSuccess){
                             JOptionPane.showMessageDialog(AddSupplierJFrame.this,"添加成功！");
-//                            jTable.setModel(new SupplierTableModel());
+                            jTable.setModel(new SupplierTableModel());
                             dispose();
                         }else{
                             JOptionPane.showMessageDialog(AddSupplierJFrame.this,"添加失败！");

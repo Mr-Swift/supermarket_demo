@@ -7,6 +7,8 @@ import com.supermarket.tmodel.UserTableModel;
 import com.supermarket.ui.combbox.ComBoBoxOfAuthority;
 import com.supermarket.ui.combbox.ComBoBoxOfSex;
 import com.supermarket.ui.jframeutil.CheckOfNull;
+import com.supermarket.ui.jframeutil.CheckOfPhone;
+import com.supermarket.ui.supplierupdate.AddSupplierJFrame;
 
 
 import javax.swing.*;
@@ -212,6 +214,8 @@ public class AddUserJFrame extends JFrame implements Runnable{
                     JOptionPane.showMessageDialog(AddUserJFrame.this,"此用户未成年!");
                 }else if(CheckOfNull.check(jLabel_star_telphone.getText())){
                     JOptionPane.showMessageDialog(AddUserJFrame.this,"用户电话不可为空!");
+                }else if(!CheckOfPhone.checkPhone(jTextField_telphone.getText().trim())){
+                    JOptionPane.showMessageDialog(AddUserJFrame.this,"电话号码格式不正确！");
                 }else if(jcomboBox_autuority.getSelectedItem().equals("请选择身份")){
                     JOptionPane.showMessageDialog(AddUserJFrame.this,"请选择用户权限!");
                 }else{
@@ -220,7 +224,7 @@ public class AddUserJFrame extends JFrame implements Runnable{
                         boolean checkOfSuccess=insertUser();
                         if(checkOfSuccess){
                             JOptionPane.showMessageDialog(AddUserJFrame.this,"添加成功！");
-//                            jTable.setModel(new UserTableModel());
+                            jTable.setModel(new UserTableModel());
                             dispose();
                         }else{
                             JOptionPane.showMessageDialog(AddUserJFrame.this,"添加失败！");

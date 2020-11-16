@@ -32,6 +32,7 @@ public class UserDaoImpl implements IUserDao {
             user.setSex(resultSet.getString("sex"));
             user.setAge(resultSet.getInt("age"));
             user.setUser_telphone(resultSet.getString("user_telphone"));
+            user.setUser_address(resultSet.getString("user_address"));
             user.setAuthority(resultSet.getString("authority"));
             return user;
         }

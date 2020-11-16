@@ -6,6 +6,7 @@ import com.supermarket.tmodel.UserTableModel;
 import com.supermarket.ui.combbox.ComBoBoxOfAuthority;
 import com.supermarket.ui.combbox.ComBoBoxOfSex;
 import com.supermarket.ui.jframeutil.CheckOfNull;
+import com.supermarket.ui.jframeutil.CheckOfPhone;
 
 import javax.swing.*;
 import java.awt.*;
@@ -217,6 +218,8 @@ public class ModifyUserJFrame extends JFrame implements Runnable{
                     JOptionPane.showMessageDialog(ModifyUserJFrame.this,"此用户未成年!");
                 }else if(CheckOfNull.check(jLabel_star_telphone.getText())){
                     JOptionPane.showMessageDialog(ModifyUserJFrame.this,"用户电话不可为空!");
+                }else if(!CheckOfPhone.checkPhone(jTextField_telphone.getText().trim())){
+                    JOptionPane.showMessageDialog(ModifyUserJFrame.this,"电话号码格式不正确！");
                 }else if(jcomboBox_autuority.getSelectedItem().equals("请选择身份")){
                     JOptionPane.showMessageDialog(ModifyUserJFrame.this,"请选择用户权限!");
                 }else{
@@ -225,7 +228,7 @@ public class ModifyUserJFrame extends JFrame implements Runnable{
                         boolean checkOfSuccess=modifyUser(id_modify);
                         if(checkOfSuccess){
                             JOptionPane.showMessageDialog(ModifyUserJFrame.this,"修改成功！");
-//                            jTable.setModel(new UserTableModel());
+                            jTable.setModel(new UserTableModel());
                             dispose();
                         }else{
                             JOptionPane.showMessageDialog(ModifyUserJFrame.this,"修改失败！");

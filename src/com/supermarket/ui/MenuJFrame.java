@@ -307,10 +307,11 @@ public class MenuJFrame extends JFrame implements Runnable{
             public void actionPerformed(ActionEvent e) {
                 try {
                     new AddAccountJFrame(jTable_bill);
-                    initPageParams_bill();
-                    currentPage_bill=allPages_bill;
-                    jTable_bill.setModel(new BillTableModel(currentPage_bill,pageSize));
-                    jLabelPageInfo_bill = new JLabel("一共有"+allPages_bill+"页数据,当前为"+currentPage_bill+"页");
+//                    initPageParams_bill();
+//                    currentPage_bill=allPages_bill;
+//                    jTable_bill.setModel(new BillTableModel(currentPage_bill,pageSize));
+//                    jLabelPageInfo_bill = new JLabel("一共有"+allPages_bill+"页数据,当前为"+currentPage_bill+"页");
+                    jLabelPageInfo_bill.setText("");
                 } catch (SQLException throwables) {
                     throwables.printStackTrace();
                 }
@@ -329,8 +330,9 @@ public class MenuJFrame extends JFrame implements Runnable{
                     int account_id_modify= (int) jTable_bill.getValueAt(jTable_bill.getSelectedRow(),0);
                     try {
                         new ModifyAccountJFrame(jTable_bill,account_id_modify);
-                        jTable_bill.setModel(new BillTableModel(currentPage_bill,pageSize));
-                        jLabelPageInfo_bill = new JLabel("一共有"+allPages_bill+"页数据,当前为"+currentPage_bill+"页");
+//                        jTable_bill.setModel(new BillTableModel(currentPage_bill,pageSize));
+//                        jLabelPageInfo_bill = new JLabel("一共有"+allPages_bill+"页数据,当前为"+currentPage_bill+"页");
+                        jLabelPageInfo_bill.setText("");
                     } catch (SQLException throwables) {
                         throwables.printStackTrace();
                     }
@@ -357,6 +359,7 @@ public class MenuJFrame extends JFrame implements Runnable{
                         initPageParams_bill();
 //                        currentPage_bill=allPages_bill;
                         jTable_bill.setModel(new BillTableModel(currentPage_bill,pageSize));
+//                        jTable_bill=new JTable(new BillTableModel(currentPage_bill,pageSize));
                         jLabelPageInfo_bill = new JLabel("一共有"+allPages_bill+"页数据,当前为"+currentPage_bill+"页");
                     } catch (SQLException throwables) {
                         throwables.printStackTrace();
@@ -712,10 +715,11 @@ public class MenuJFrame extends JFrame implements Runnable{
             public void actionPerformed(ActionEvent e) {
                 try {
                     new AddSupplierJFrame(jTable_supplier);
-                    initPageParams_supplier();
-                    currentPage_supplier=allPages_supplier;
-                    jTable_supplier.setModel(new SupplierTableModel(currentPage_supplier,pageSize));
-                    jLabelPageInfo_supplier.setText("一共有"+allPages_supplier+"页数据,当前为"+currentPage_supplier+"页");
+//                    initPageParams_supplier();
+//                    currentPage_supplier=allPages_supplier;
+//                    jTable_supplier.setModel(new SupplierTableModel(currentPage_supplier,pageSize));
+//                    jLabelPageInfo_supplier.setText("一共有"+allPages_supplier+"页数据,当前为"+currentPage_supplier+"页");
+                    jLabelPageInfo_supplier.setText("");
                 } catch (SQLException throwables) {
                     throwables.printStackTrace();
                 }
@@ -760,8 +764,9 @@ public class MenuJFrame extends JFrame implements Runnable{
                     int supplier_id_modify= (int) jTable_supplier.getValueAt(jTable_supplier.getSelectedRow(),0);
                     try {
                         new ModifySupplierJFrame(jTable_supplier,supplier_id_modify);
-                        jTable_supplier.setModel(new SupplierTableModel(currentPage_supplier,pageSize));
-                        jLabelPageInfo_supplier.setText("一共有"+allPages_supplier+"页数据,当前为"+currentPage_supplier+"页");
+//                        jTable_supplier.setModel(new SupplierTableModel(currentPage_supplier,pageSize));
+//                        jLabelPageInfo_supplier.setText("一共有"+allPages_supplier+"页数据,当前为"+currentPage_supplier+"页");
+                        jLabelPageInfo_supplier.setText("");
                     } catch (SQLException throwables) {
                         throwables.printStackTrace();
                     }
@@ -1001,10 +1006,11 @@ public class MenuJFrame extends JFrame implements Runnable{
             public void actionPerformed(ActionEvent e) {
                 try {
                     new AddUserJFrame(jTable_user);
-                    initPageParams_user();
-                    currentPage_user=allPages_user;
-                    jTable_user.setModel(new UserTableModel(currentPage_user,pageSize));
-                    jLabelPageInfo_user.setText("一共有"+allPages_user+"页数据,当前为"+currentPage_user+"页");
+//                    initPageParams_user();
+//                    currentPage_user=allPages_user;
+//                    jTable_user.setModel(new UserTableModel(currentPage_user,pageSize));
+//                    jLabelPageInfo_user.setText("一共有"+allPages_user+"页数据,当前为"+currentPage_user+"页");
+                    jLabelPageInfo_supplier.setText("");
                 } catch (SQLException throwables) {
                     throwables.printStackTrace();
                 }
@@ -1024,8 +1030,9 @@ public class MenuJFrame extends JFrame implements Runnable{
                     int user_id_modify = (int) jTable_user.getValueAt(jTable_user.getSelectedRow(), 0);
                     try {
                         new ModifyUserJFrame(jTable_user, user_id_modify);
-                        jTable_user.setModel(new UserTableModel(currentPage_user,pageSize));
-                        jLabelPageInfo_user.setText("一共有"+allPages_user+"页数据,当前为"+currentPage_user+"页");
+//                        jTable_user.setModel(new UserTableModel(currentPage_user,pageSize));
+//                        jLabelPageInfo_user.setText("一共有"+allPages_user+"页数据,当前为"+currentPage_user+"页");
+                        jLabelPageInfo_supplier.setText("");
                     } catch (SQLException throwables) {
                         throwables.printStackTrace();
                     }
