@@ -729,7 +729,7 @@ public class MenuJFrame extends JFrame implements Runnable{
         jButton_input.setBackground(Color.CYAN);
         jButton_input.setBorderPainted(false);
 //        jButton_input.setBackground(Color.YELLOW);//Black By Default
-        jButton_input.setOpaque(true);
+//        jButton_input.setOpaque(true);
         jButton_input.setBorderPainted(false);
 //        jButton_output.setForeground(Color.YELLOW);//设置按钮中字体颜色
         jPanel_Supplier_button.add(jButton_input);
