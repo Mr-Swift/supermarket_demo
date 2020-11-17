@@ -14,7 +14,6 @@ import com.supermarket.ui.userupdate.AddUserJFrame;
 import com.supermarket.ui.userupdate.ModifyUserJFrame;
 import com.supermarket.util.FileActionUtil;
 
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -123,11 +122,23 @@ public class MenuJFrame extends JFrame implements Runnable{
         jPanel.setOpaque(false);
         jPanel.setLayout(null);
 
-        ImageIcon imageIcon_bill=new ImageIcon("src/picture/btn_bill.gif");
-        ImageIcon imageIcon_supplier=new ImageIcon("src/picture/btn_suppliers.gif");
-        ImageIcon imageIcon_user=new ImageIcon("src/picture/btn_users.gif");
-        ImageIcon imageIcon_report=new ImageIcon("src/picture/btn_reports.gif");
-        ImageIcon imageIcon_exit=new ImageIcon("src/picture/btn_exit.gif");
+//        ImageIcon imageIcon_bill=new ImageIcon("src/picture/btn_bill.gif");
+//        ImageIcon imageIcon_supplier=new ImageIcon("src/picture/btn_suppliers.gif");
+//        ImageIcon imageIcon_user=new ImageIcon("src/picture/btn_users.gif");
+//        ImageIcon imageIcon_report=new ImageIcon("src/picture/btn_reports.gif");
+//        ImageIcon imageIcon_exit=new ImageIcon("src/picture/btn_exit.gif");
+
+        ImageIcon imageIcon_bill=new ImageIcon("src/picture/bill_new.png");
+        ImageIcon imageIcon_supplier=new ImageIcon("src/picture/supplier_new.png");
+        ImageIcon imageIcon_user=new ImageIcon("src/picture/user_new.png");
+        ImageIcon imageIcon_report=new ImageIcon("src/picture/report_new.png");
+        ImageIcon imageIcon_exit=new ImageIcon("src/picture/exit_new.png");
+        ImageIcon imageIcon_search=new ImageIcon("src/picture/search_new.png");
+        ImageIcon imageIcon_out=new ImageIcon("src/picture/out_new.png");
+        ImageIcon imageIcon_in=new ImageIcon("src/picture/in_new.png");
+        ImageIcon imageIcon_add=new ImageIcon("src/picture/add_new.png");
+        ImageIcon imageIcon_delete=new ImageIcon("src/picture/delete_new.png");
+        ImageIcon imageIcon_modify=new ImageIcon("src/picture/modify_new.png");
 
 
 
@@ -140,15 +151,17 @@ public class MenuJFrame extends JFrame implements Runnable{
 
         //初始化菜单界面左区
         JPanel jPanel_Left=new JPanel();
-        jPanel_Left.setBounds(0,102,195,470);
+        jPanel_Left.setOpaque(false);
+        jPanel_Left.setBounds(18,109,180,450);
 //        jPanel_Left.setBackground(Color.PINK);
         jPanel.add(jPanel_Left);
-        jPanel_Left.setLayout(new GridLayout(8,1,0,5));
+        jPanel_Left.setLayout(new GridLayout(8,1,0,25));
 
 
         //初始化菜单界面右区
         JPanel jPanel_Right=new JPanel();
-        jPanel_Right.setBounds(205,142,795,430);
+        jPanel_Right.setOpaque(false);
+        jPanel_Right.setBounds(235,108,795,455);
 //        jPanel_Right.setBackground(Color.PINK);
         CardLayout cardLayout=new CardLayout();
         jPanel_Right.setLayout(cardLayout);
@@ -208,6 +221,7 @@ public class MenuJFrame extends JFrame implements Runnable{
         //----------------------------------------------------------------------------------------
         //卡片布局第一页（默认页）
         JPanel jPanelWelcome = new JPanel();
+        jPanelWelcome.setOpaque(false);
         JLabel jLabelWelcome = new JLabel("                         欢迎使用超市管理系统！");
         jLabelWelcome.setFont(new Font("微软雅黑",Font.BOLD,30));
         jPanelWelcome.setLayout(new BorderLayout());
@@ -217,12 +231,14 @@ public class MenuJFrame extends JFrame implements Runnable{
         //-----------------------------------------------------------------------------------------
         //卡片布局（账单管理按钮显示界面）
         JPanel jPanel_Bill = new JPanel();
+        jPanel_Bill.setOpaque(false);
         jPanel_Bill.setLayout(null);
         jPanel_Right.add(jPanel_Bill,"订单管理");
 
         //查询按钮及输入框
         JPanel jPanel_Bill_North = new JPanel();
-        jPanel_Bill_North.setBackground(Color.PINK);
+        jPanel_Bill_North.setOpaque(false);
+//        jPanel_Bill_North.setBackground(Color.PINK);
         jPanel_Bill_North.setBounds(0,0,795,45);
         jPanel_Bill_North.setLayout(new FlowLayout(FlowLayout.LEFT,15,10));
         jPanel_Bill.add(jPanel_Bill_North);
@@ -244,12 +260,17 @@ public class MenuJFrame extends JFrame implements Runnable{
         jPanel_Bill_North.add(jTextField_Bill_North);
         jPanel_Bill_North.add(jLabel_CheckOfPay);
         jPanel_Bill_North.add(jComboBox_CheckOfPay);
-        JButton button_bill_search = new JButton("查询");
+//        JButton button_bill_search = new JButton("查询");
+
+        JButton button_bill_search=new JButton(imageIcon_search);
+        button_bill_search.setBackground(Color.PINK);
+        button_bill_search.setBorderPainted(false);
         jPanel_Bill_North.add(button_bill_search);
 
 
         //账单管理>>
         JPanel jPanel_Bill_button = new JPanel();
+        jPanel_Bill_button.setOpaque(false);
         //jPanel_Bill_button.setOpaque(false);
         jPanel_Bill_button.setLayout(new FlowLayout(FlowLayout.LEFT,20,10));
         jPanel_Bill_button.setBounds(0,45,795,55);
@@ -264,18 +285,37 @@ public class MenuJFrame extends JFrame implements Runnable{
         /*
         mac os 默认的border是aqua border（look and feel设置），这个border是一个灰白色填充外加灰色边界的矩形bai，在初始化button的时候默认是显示border的.
          */
-        JButton jButton_output=new JButton("导出");
-        jButton_output.setBackground(Color.YELLOW);//Black By Default
-        jButton_output.setOpaque(true);
+//        JButton jButton_output=new JButton("导出");
+        JButton jButton_output=new JButton(imageIcon_out);
+        jButton_output.setBackground(Color.CYAN);//Black By Default
+//        jButton_output.setOpaque(true);
         jButton_output.setBorderPainted(false);
 //        jButton_output.setForeground(Color.YELLOW);//设置按钮中字体颜色
         jPanel_Bill_button.add(jButton_output);
 
 
         //增删改按钮
-        JButton jButton_bill_add=new JButton("添加数据");
-        JButton jButton_bill_modify=new JButton("修改数据");
-        JButton jButton_bill_delete=new JButton("删除数据");
+//        JButton jButton_bill_add=new JButton("添加数据");
+//        JButton jButton_bill_modify=new JButton("修改数据");
+//        JButton jButton_bill_delete=new JButton("删除数据");
+
+
+        JButton jButton_bill_add=new JButton(imageIcon_add);
+        JButton jButton_bill_modify=new JButton(imageIcon_modify);
+        JButton jButton_bill_delete=new JButton(imageIcon_delete);
+
+        jButton_bill_add.setBackground(Color.CYAN);
+        jButton_bill_add.setBorderPainted(false);
+
+        jButton_bill_modify.setBackground(Color.CYAN);
+        jButton_bill_modify.setBorderPainted(false);
+
+        jButton_bill_delete.setBackground(Color.CYAN);
+        jButton_bill_delete.setBorderPainted(false);
+
+
+
+
         jPanel_Bill_button.add(jButton_bill_add);
         jPanel_Bill_button.add(jButton_bill_modify);
         jPanel_Bill_button.add(jButton_bill_delete);
@@ -294,13 +334,16 @@ public class MenuJFrame extends JFrame implements Runnable{
 
         initPageParams_bill();
         jTable_bill=new JTable(new BillTableModel(currentPage_bill,pageSize));
+        jTable_bill.setOpaque(false);
         JScrollPane jScrollPane_bill=new JScrollPane(jTable_bill);
+        jScrollPane_bill.setOpaque(false);
         jPanel_Bill_table.add(jScrollPane_bill,BorderLayout.CENTER);
 
         //页面切换按钮区
         JPanel jPanel_Bill_pageArea=new JPanel();
+        jPanel_Bill_pageArea.setOpaque(false);
         jPanel_Bill_pageArea.setLayout(new FlowLayout(FlowLayout.CENTER));
-        jPanel_Bill_pageArea.setBounds(0,400,795,30);
+        jPanel_Bill_pageArea.setBounds(0,400,795,54);
         jPanel_Bill_pageArea.setBackground(Color.PINK);
         jPanel_Bill.add(jPanel_Bill_pageArea);
 
@@ -635,12 +678,14 @@ public class MenuJFrame extends JFrame implements Runnable{
          * 卡片布局（供应商管理按钮显示信息）
          */
         JPanel jPanel_Supplier=new JPanel();
+        jPanel_Supplier.setOpaque(false);
         jPanel_Supplier.setLayout(null);
         //jPanel_Supplier.setBackground(Color.PINK);
         jPanel_Right.add(jPanel_Supplier, "供应商管理");
 
         //供应商查询按钮及输入框
         JPanel jPanel_Supplier_North = new JPanel();
+        jPanel_Supplier_North.setOpaque(false);
         jPanel_Supplier_North.setBackground(Color.PINK);
         jPanel_Supplier_North.setBounds(0,0,795,45);
         jPanel_Supplier_North.setLayout(new FlowLayout(FlowLayout.LEFT,30,10));
@@ -648,7 +693,10 @@ public class MenuJFrame extends JFrame implements Runnable{
 
         JLabel jLabel_NameOfSupplier = new JLabel("供应商名称：");
         JTextField jTextField_Supplier_North=new JTextField(15);
-        JButton jButton_Supplier_search=new JButton("查询");
+//        JButton jButton_Supplier_search=new JButton("查询");
+        JButton jButton_Supplier_search=new JButton(imageIcon_search);
+        jButton_Supplier_search.setBackground(Color.CYAN);
+        jButton_Supplier_search.setBorderPainted(false);
         jButton_Supplier_search.setFont(new Font("宋体",Font.BOLD,15));
 
         jPanel_Supplier_North.add(jLabel_NameOfSupplier);
@@ -657,6 +705,7 @@ public class MenuJFrame extends JFrame implements Runnable{
 
         //供应商管理>>
         JPanel jPanel_Supplier_button = new JPanel();
+        jPanel_Supplier_button.setOpaque(false);
         jPanel_Supplier_button.setLayout(new FlowLayout(FlowLayout.LEFT,20,10));
         jPanel_Supplier_button.setBounds(0,45,795,55);
         jPanel_Supplier_button.setBackground(Color.CYAN);
@@ -671,8 +720,11 @@ public class MenuJFrame extends JFrame implements Runnable{
          * 导入按钮
          * mac os 默认的border是aqua border（look and feel设置），这个border是一个灰白色填充外加灰色边界的矩形bai，在初始化button的时候默认是显示border的.
          */
-        JButton jButton_input=new JButton("导入");
-        jButton_input.setBackground(Color.YELLOW);//Black By Default
+//        JButton jButton_input=new JButton("导入");
+        JButton jButton_input=new JButton(imageIcon_in);
+        jButton_input.setBackground(Color.CYAN);
+        jButton_input.setBorderPainted(false);
+//        jButton_input.setBackground(Color.YELLOW);//Black By Default
         jButton_input.setOpaque(true);
         jButton_input.setBorderPainted(false);
 //        jButton_output.setForeground(Color.YELLOW);//设置按钮中字体颜色
@@ -711,9 +763,22 @@ public class MenuJFrame extends JFrame implements Runnable{
         });
 
         //增删改按钮
-        JButton jButton_supplier_add=new JButton("添加数据");
-        JButton jButton_supplier_modify=new JButton("修改数据");
-        JButton jButton_supplier_delete=new JButton("删除数据");
+//        JButton jButton_supplier_add=new JButton("添加数据");
+        JButton jButton_supplier_add=new JButton(imageIcon_add);
+        jButton_supplier_add.setBackground(Color.CYAN);
+        jButton_supplier_add.setBorderPainted(false);
+
+//        JButton jButton_supplier_modify=new JButton("修改数据");
+        JButton jButton_supplier_modify=new JButton(imageIcon_modify);
+        jButton_supplier_modify.setBackground(Color.CYAN);
+        jButton_supplier_modify.setBorderPainted(false);
+
+
+//        JButton jButton_supplier_delete=new JButton("删除数据");
+        JButton jButton_supplier_delete=new JButton(imageIcon_delete);
+        jButton_supplier_delete.setBackground(Color.CYAN);
+        jButton_supplier_delete.setBorderPainted(false);
+
         jPanel_Supplier_button.add(jButton_supplier_add);
         jPanel_Supplier_button.add(jButton_supplier_modify);
         jPanel_Supplier_button.add(jButton_supplier_delete);
@@ -744,13 +809,16 @@ public class MenuJFrame extends JFrame implements Runnable{
 
         initPageParams_supplier();
         jTable_supplier=new JTable(new SupplierTableModel(currentPage_supplier,pageSize));
+        jTable_supplier.setOpaque(false);
         JScrollPane jScrollPane_supplier=new JScrollPane(jTable_supplier);
+        jScrollPane_supplier.setOpaque(false);
         jPanel_Supplier_table.add(jScrollPane_supplier,BorderLayout.CENTER);
 
         //页面切换按钮区
         JPanel jPanel_supplier_pageArea=new JPanel();
+        jPanel_supplier_pageArea.setOpaque(false);
         jPanel_supplier_pageArea.setLayout(new FlowLayout(FlowLayout.CENTER));
-        jPanel_supplier_pageArea.setBounds(0,400,795,30);
+        jPanel_supplier_pageArea.setBounds(0,400,795,54);
         jPanel_supplier_pageArea.setBackground(Color.PINK);
         jPanel_Supplier.add(jPanel_supplier_pageArea);
 
@@ -944,11 +1012,13 @@ public class MenuJFrame extends JFrame implements Runnable{
          * 卡片布局（用户管理按钮显示界面）------------------------------------------------------------------
          */
         JPanel jPanel_user = new JPanel();
+        jPanel_user.setOpaque(false);
         jPanel_user.setLayout(null);
         jPanel_Right.add(jPanel_user,"用户管理");
 
         /**查询按钮及输入*/
         JPanel jPanel_user_North = new JPanel();
+        jPanel_user_North.setOpaque(false);
         jPanel_user_North.setBackground(Color.PINK);
         jPanel_user_North.setBounds(0,0,795,45);
         jPanel_user_North.setLayout(new FlowLayout(FlowLayout.LEFT,15,10));
@@ -956,7 +1026,10 @@ public class MenuJFrame extends JFrame implements Runnable{
 
         JLabel jLabel_nameOfUser=new JLabel("用户名称");
         JTextField jTextField_user_north=new JTextField(15);
-        JButton jButton_user_search=new JButton("查询");
+//        JButton jButton_user_search=new JButton("查询");
+        JButton jButton_user_search=new JButton(imageIcon_search);
+        jButton_user_search.setBackground(Color.CYAN);
+        jButton_user_search.setBorderPainted(false);
         jButton_user_search.setFont(new Font("宋体",Font.BOLD,15));
 
         jPanel_user_North.add(jLabel_nameOfUser);
@@ -965,6 +1038,7 @@ public class MenuJFrame extends JFrame implements Runnable{
 
         /**用户管理>>*/
         JPanel jPanel_user_button = new JPanel();
+        jPanel_user_button.setOpaque(false);
         jPanel_user_button.setLayout(new FlowLayout(FlowLayout.LEFT,20,10));
         jPanel_user_button.setBounds(0,45,795,55);
         jPanel_user_button.setBackground(Color.CYAN);
@@ -974,9 +1048,26 @@ public class MenuJFrame extends JFrame implements Runnable{
         jLabel_user_title.setFont(new Font("微软雅黑",Font.BOLD,25));
         jPanel_user_button.add(jLabel_user_title);
 
-        JButton jButton_user_add=new JButton("添加数据");
-        JButton jButton_user_modify=new JButton("修改数据");
-        JButton jButton_user_delete=new JButton("删除数据");
+//        JButton jButton_user_add=new JButton("添加数据");
+//        JButton jButton_user_modify=new JButton("修改数据");
+//        JButton jButton_user_delete=new JButton("删除数据");
+
+        JButton jButton_user_add=new JButton(imageIcon_add);
+        JButton jButton_user_modify=new JButton(imageIcon_modify);
+        JButton jButton_user_delete=new JButton(imageIcon_delete);
+
+        jButton_user_add.setBackground(Color.CYAN);
+        jButton_user_add.setBorderPainted(false);
+
+        jButton_user_modify.setBackground(Color.CYAN);
+        jButton_user_modify.setBorderPainted(false);
+
+        jButton_user_delete.setBackground(Color.CYAN);
+        jButton_user_delete.setBorderPainted(false);
+
+
+
+
         jPanel_user_button.add(jButton_user_add);
         jPanel_user_button.add(jButton_user_modify);
         jPanel_user_button.add(jButton_user_delete);
@@ -985,6 +1076,7 @@ public class MenuJFrame extends JFrame implements Runnable{
 
         /**table*/
         JPanel jPanel_user_table=new JPanel();
+        jPanel_user_table.setOpaque(false);
         jPanel_user_table.setLayout(new BorderLayout());
         jPanel_user_table.setBackground(Color.YELLOW);
         jPanel_user_table.setBounds(0,100,795,300);
@@ -992,13 +1084,16 @@ public class MenuJFrame extends JFrame implements Runnable{
 
         initPageParams_user();
         jTable_user = new JTable(new UserTableModel(currentPage_user, pageSize));
+        jTable_user.setOpaque(false);
         JScrollPane jScrollPane_user = new JScrollPane(jTable_user);
+        jScrollPane_user.setOpaque(false);
         jPanel_user_table.add(jScrollPane_user, BorderLayout.CENTER);
 
         /**页面切换按钮区*/
         JPanel jPanel_user_pageArea=new JPanel();
+        jPanel_user_pageArea.setOpaque(false);
         jPanel_user_pageArea.setLayout(new FlowLayout(FlowLayout.CENTER));
-        jPanel_user_pageArea.setBounds(0,400,795,30);
+        jPanel_user_pageArea.setBounds(0,400,795,54);
         jPanel_user_pageArea.setBackground(Color.PINK);
         jPanel_user.add(jPanel_user_pageArea);
 
@@ -1220,16 +1315,20 @@ public class MenuJFrame extends JFrame implements Runnable{
          * 卡片布局（报表管理显示界面）
          */
         JPanel jPanel_report=new JPanel();
+        jPanel_report.setOpaque(false);
         jPanel_report.setLayout(new BorderLayout());
         jPanel_Right.add(jPanel_report,"报表管理");
 
         JPanel jPanel_report_north=new JPanel();
+        jPanel_report_north.setOpaque(false);
         jPanel_report_north.setLayout(new GridLayout(1,2));
         jPanel_report_north.setBackground(Color.CYAN);
         jPanel_report.add(jPanel_report_north, BorderLayout.NORTH);
 
         JPanel jPanel_groupByCommodity = new JPanel();
+        jPanel_groupByCommodity.setOpaque(false);
         JPanel jPanel_groupBySupplier = new JPanel();
+        jPanel_groupBySupplier.setOpaque(false);
         jPanel_groupByCommodity.setLayout(new FlowLayout(FlowLayout.CENTER));
         jPanel_groupBySupplier.setLayout(new FlowLayout(FlowLayout.CENTER));
         jPanel_report_north.add(jPanel_groupByCommodity);
@@ -1246,6 +1345,7 @@ public class MenuJFrame extends JFrame implements Runnable{
         buttonGroup.add(jRadioButton_groupBySupplier);
 
         JPanel jPanel_report_center=new JPanel();
+        jPanel_report_center.setOpaque(false);
         CardLayout cardLayout_report=new CardLayout();
         jPanel_report_center.setLayout(cardLayout_report);
         jPanel_report_center.setBackground(Color.yellow);
@@ -1270,6 +1370,7 @@ public class MenuJFrame extends JFrame implements Runnable{
 
         /**页面切换按钮区*/
         JPanel jPanel_report_pageArea=new JPanel();
+        jPanel_report_pageArea.setOpaque(false);
         CardLayout cardLayout_report_pageArea=new CardLayout();
         jPanel_report_pageArea.setLayout(cardLayout_report_pageArea);
         jPanel_report.add(jPanel_report_pageArea, BorderLayout.SOUTH);
@@ -1523,7 +1624,7 @@ public class MenuJFrame extends JFrame implements Runnable{
         jPanel.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                System.out.println("x--->"+(e.getX()-205)+"\ty--->"+(e.getY()-142));
+                System.out.println("x--->"+(e.getX())+"\ty--->"+(e.getY()));
             }
         });
 
