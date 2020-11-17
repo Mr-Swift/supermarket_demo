@@ -142,6 +142,8 @@ public class MenuJFrame extends JFrame implements Runnable{
 
 
 
+
+
         JButton jButton_bill=new JButton(imageIcon_bill);
         JButton jButton_supplier=new JButton(imageIcon_supplier);
         JButton jButton_user=new JButton(imageIcon_user);
