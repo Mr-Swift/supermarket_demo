@@ -329,6 +329,7 @@ public class MenuJFrame extends JFrame implements Runnable{
 
         //table
         JPanel jPanel_Bill_table=new JPanel();
+        jPanel_Bill_table.setOpaque(false);
         jPanel_Bill_table.setLayout(new BorderLayout());
         jPanel_Bill_table.setBackground(Color.YELLOW);
         jPanel_Bill_table.setBounds(0,100,795,300);
@@ -339,6 +340,7 @@ public class MenuJFrame extends JFrame implements Runnable{
         jTable_bill.setOpaque(false);
         JScrollPane jScrollPane_bill=new JScrollPane(jTable_bill);
         jScrollPane_bill.setOpaque(false);
+        jScrollPane_bill.getViewport().setOpaque(false);
         jPanel_Bill_table.add(jScrollPane_bill,BorderLayout.CENTER);
 
         //页面切换按钮区
@@ -804,6 +806,7 @@ public class MenuJFrame extends JFrame implements Runnable{
 
         //table
         JPanel jPanel_Supplier_table=new JPanel();
+        jPanel_Supplier_table.setOpaque(false);
         jPanel_Supplier_table.setLayout(new BorderLayout());
         jPanel_Supplier_table.setBackground(Color.YELLOW);
         jPanel_Supplier_table.setBounds(0,100,795,300);
@@ -814,6 +817,7 @@ public class MenuJFrame extends JFrame implements Runnable{
         jTable_supplier.setOpaque(false);
         JScrollPane jScrollPane_supplier=new JScrollPane(jTable_supplier);
         jScrollPane_supplier.setOpaque(false);
+        jScrollPane_supplier.getViewport().setOpaque(false);
         jPanel_Supplier_table.add(jScrollPane_supplier,BorderLayout.CENTER);
 
         //页面切换按钮区
@@ -1089,10 +1093,12 @@ public class MenuJFrame extends JFrame implements Runnable{
         jTable_user.setOpaque(false);
         JScrollPane jScrollPane_user = new JScrollPane(jTable_user);
         jScrollPane_user.setOpaque(false);
+        jScrollPane_user.getViewport().setOpaque(false);
         jPanel_user_table.add(jScrollPane_user, BorderLayout.CENTER);
 
         /**页面切换按钮区*/
         JPanel jPanel_user_pageArea=new JPanel();
+        jPanel_user_pageArea.setOpaque(false);
         jPanel_user_pageArea.setOpaque(false);
         jPanel_user_pageArea.setLayout(new FlowLayout(FlowLayout.CENTER));
         jPanel_user_pageArea.setBounds(0,400,795,54);
@@ -1354,20 +1360,28 @@ public class MenuJFrame extends JFrame implements Runnable{
         jPanel_report.add(jPanel_report_center,BorderLayout.CENTER);
 
         JPanel jPanel_report_center_commodity=new JPanel(new BorderLayout());
+        jPanel_report_center_commodity.setOpaque(false);
         JPanel jPanel_report_center_supplier=new JPanel(new BorderLayout());
-        jPanel_report_center_commodity.setBackground(Color.CYAN);
-        jPanel_report_center_supplier.setBackground(Color.green);
+        jPanel_report_center_supplier.setOpaque(false);
+//        jPanel_report_center_commodity.setBackground(Color.CYAN);
+//        jPanel_report_center_supplier.setBackground(Color.green);
         jPanel_report_center.add(jPanel_report_center_commodity,"商品分组查询");
         jPanel_report_center.add(jPanel_report_center_supplier, "供应商分组查询");
 
         init_initPageParams_report_commodity();
         jTable_report_commodity = new JTable(new GroupByCommodityTableModel(currentPage_report_commodity, pageSize));
+        jTable_report_commodity.setOpaque(false);
         JScrollPane jScrollPane_report_commodity = new JScrollPane(jTable_report_commodity);
+        jScrollPane_report_commodity.setOpaque(false);
+        jScrollPane_report_commodity.getViewport().setOpaque(false);
         jPanel_report_center_commodity.add(jScrollPane_report_commodity, BorderLayout.CENTER);
         
         init_initPageParams_report_supplier();
         jTable_report_supplier=new JTable(new GroupBySupplierTableModel(currentPage_report_supplier, pageSize));
+        jTable_report_supplier.setOpaque(false);
         JScrollPane jScrollPane_report_supplier=new JScrollPane(jTable_report_supplier);
+        jScrollPane_report_supplier.setOpaque(false);
+        jScrollPane_report_supplier.getViewport().setOpaque(false);
         jPanel_report_center_supplier.add(jScrollPane_report_supplier, BorderLayout.CENTER);
 
         /**页面切换按钮区*/
@@ -1378,10 +1392,12 @@ public class MenuJFrame extends JFrame implements Runnable{
         jPanel_report.add(jPanel_report_pageArea, BorderLayout.SOUTH);
 
         JPanel jPanel_report_pageArea_commodity=new JPanel(new FlowLayout(FlowLayout.CENTER));
+        jPanel_report_pageArea_commodity.setOpaque(false);
         jPanel_report_pageArea_commodity.setBackground(Color.PINK);
         jPanel_report_pageArea.add(jPanel_report_pageArea_commodity,"商品分组查询");
 
         JPanel jPanel_report_pageArea_supplier=new JPanel(new FlowLayout(FlowLayout.CENTER));
+        jPanel_report_pageArea_supplier.setOpaque(false);
         jPanel_report_pageArea_supplier.setBackground(Color.CYAN);
         jPanel_report_pageArea.add(jPanel_report_pageArea_supplier,"供应商分组查询");
 
