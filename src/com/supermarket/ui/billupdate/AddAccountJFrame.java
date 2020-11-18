@@ -243,6 +243,7 @@ public class AddAccountJFrame extends JFrame implements Runnable{
                         boolean checkOfSuccess=insertAccount();
                         if(checkOfSuccess){
                             JOptionPane.showMessageDialog(AddAccountJFrame.this,"添加成功！");
+                            jTable.setModel(new BillTableModel());
                             dispose();
                         }else{
                             JOptionPane.showMessageDialog(AddAccountJFrame.this,"添加失败！");

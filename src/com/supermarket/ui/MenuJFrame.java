@@ -279,7 +279,7 @@ public class MenuJFrame extends JFrame implements Runnable{
         jPanel_Bill_button.setBackground(Color.CYAN);
         jPanel_Bill.add(jPanel_Bill_button);
 
-        JLabel jLabel_Bill_title=new JLabel("账单管理 >>     ");
+        JLabel jLabel_Bill_title=new JLabel("订单管理 >>     ");
         jLabel_Bill_title.setFont(new Font("微软雅黑",Font.BOLD,25));
         jPanel_Bill_button.add(jLabel_Bill_title);
 
@@ -1566,7 +1566,15 @@ public class MenuJFrame extends JFrame implements Runnable{
         jRadioButton_groupByCommodity.addItemListener(new ItemListener() {
             @Override
             public void itemStateChanged(ItemEvent e) {
+
                 if(e.getStateChange()==ItemEvent.SELECTED){
+                    try {
+                        init_initPageParams_report_commodity();
+                        jTable_report_commodity .setModel(new GroupByCommodityTableModel(currentPage_report_commodity, pageSize));
+                    } catch (SQLException throwables) {
+                        throwables.printStackTrace();
+                    }
+
                     cardLayout_report.show(jPanel_report_center,"商品分组查询");
                     cardLayout_report_pageArea.show(jPanel_report_pageArea, "商品分组查询");
                     System.out.println("1");
@@ -1578,6 +1586,13 @@ public class MenuJFrame extends JFrame implements Runnable{
             @Override
             public void itemStateChanged(ItemEvent e) {
                 if(e.getStateChange()==ItemEvent.SELECTED){
+                    try {
+                        init_initPageParams_report_supplier();
+                        jTable_report_supplier.setModel(new GroupBySupplierTableModel(currentPage_report_supplier, pageSize));
+                    } catch (SQLException throwables) {
+                        throwables.printStackTrace();
+                    }
+
                     cardLayout_report.show(jPanel_report_center,"供应商分组查询");
                     cardLayout_report_pageArea.show(jPanel_report_pageArea, "供应商分组查询");
                     System.out.println("2");
@@ -1617,6 +1632,14 @@ public class MenuJFrame extends JFrame implements Runnable{
         jButton_report.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                try {
+                    init_initPageParams_report_commodity();
+                    jTable_report_commodity .setModel(new GroupByCommodityTableModel(currentPage_report_commodity, pageSize));
+                    init_initPageParams_report_supplier();
+                    jTable_report_supplier.setModel(new GroupBySupplierTableModel(currentPage_report_supplier, pageSize));
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
                 cardLayout.show(jPanel_Right,"报表管理");
             }
         });
@@ -1629,11 +1652,16 @@ public class MenuJFrame extends JFrame implements Runnable{
             public void actionPerformed(ActionEvent e) {
                 LoginToMenu.map.clear();
                 try {
-                    new LoginJFrame();
+//                    new LoginJFrame();
+                    int choice_exit = JOptionPane.showConfirmDialog(MenuJFrame.this, "是否注销？");
+                    if (choice_exit == JOptionPane.YES_OPTION) {
+                        new LoginJFrame();
+                        dispose();
+                    }
                 } catch (SQLException throwables) {
                     throwables.printStackTrace();
                 }
-                dispose();
+//                dispose();
             }
         });
 
@@ -1663,6 +1691,20 @@ public class MenuJFrame extends JFrame implements Runnable{
 //                dispose();
 //            }
 //        });
+//                this.addWindowListener(new WindowAdapter() {
+//                    @Override
+//                    public void windowClosing(WindowEvent e) {
+//                        LoginToMenu.map.clear();
+//
+//
+//                        int choice_exit = JOptionPane.showConfirmDialog(MenuJFrame.this, "是否注销？");
+//                        if (choice_exit == JOptionPane.YES_OPTION) {
+////                        new LoginJFrame();
+//                            dispose();
+//                        }
+//
+//                    }
+//                });
         this.setResizable(false);
         this.setVisible(true);
     }
