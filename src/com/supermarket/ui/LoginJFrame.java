@@ -122,6 +122,7 @@ public class LoginJFrame extends JFrame {
         jLabel02.setBounds(460,120,50,50);
         jPasswordField1.setBounds(230,300,150,30);
 
+
         jPanel.add(jLabelName);
         jPanel.add(jTextFieldName);
         jPanel.add(jLabelPassword);
@@ -133,6 +134,7 @@ public class LoginJFrame extends JFrame {
         jPanel.add(jLabel01);
         jPanel.add(jLabel02);
         jPanel.add(jPasswordField1);
+
 
         jButtonReSet.addActionListener(new ActionListener() {//重置按钮监听器
             @Override
@@ -164,6 +166,7 @@ public class LoginJFrame extends JFrame {
                     throwables.printStackTrace();
                 }
 
+
                 if(CheckOfNull.check(loginName)){
                     JOptionPane.showMessageDialog(LoginJFrame.this,"用户名不可为空!");
                 }else if(!map_nameToPassword.containsKey(loginName)){
@@ -183,6 +186,8 @@ public class LoginJFrame extends JFrame {
                     } catch (SQLException throwables) {
                         throwables.printStackTrace();
                     }
+
+
                     dispose();
                 }
             }
@@ -196,8 +201,10 @@ public class LoginJFrame extends JFrame {
                     String loginPassword = String.valueOf(jPasswordField.getPassword());
                     String loginAuthority = (String) jComboBox.getSelectedItem();
 
+
                     Map<String, String> map_nameToPassword = new HashMap<>();
                     Map<String, String> map_nameToAuthority = new HashMap<>();
+
 
                     try {
                         java.util.List<User> listOfUser = (java.util.List<User>) iUserService.listUsers();
@@ -228,11 +235,15 @@ public class LoginJFrame extends JFrame {
                         } catch (SQLException throwables) {
                             throwables.printStackTrace();
                         }
+
+
                         dispose();
                     }
                 }
             }
         });
+
+
 
         jTextFieldName.addKeyListener(new KeyAdapter() {
             @Override
@@ -242,8 +253,12 @@ public class LoginJFrame extends JFrame {
                 String loginPassword = String.valueOf(jPasswordField.getPassword());
                 String loginAuthority = (String) jComboBox.getSelectedItem();
 
+
+
                 Map<String, String> map_nameToPassword = new HashMap<>();
                 Map<String, String> map_nameToAuthority = new HashMap<>();
+
+
 
                 try {
                     java.util.List<User> listOfUser = (java.util.List<User>) iUserService.listUsers();
@@ -254,6 +269,8 @@ public class LoginJFrame extends JFrame {
                 } catch (SQLException throwables) {
                     throwables.printStackTrace();
                 }
+
+
 
                 if (CheckOfNull.check(loginName)) {
                     JOptionPane.showMessageDialog(LoginJFrame.this, "用户名不可为空!");
@@ -274,6 +291,7 @@ public class LoginJFrame extends JFrame {
                     } catch (SQLException throwables) {
                         throwables.printStackTrace();
                     }
+
                     dispose();
                 }
             }

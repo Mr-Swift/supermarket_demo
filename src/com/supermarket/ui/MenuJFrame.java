@@ -410,6 +410,9 @@ public class MenuJFrame extends JFrame implements Runnable{
                         accountSet.add(jTable_bill.getValueAt((Integer) obj,0));
                     }
                     try {
+
+                      int bill_delete_confirm = JOptionPane.showConfirmDialog(MenuJFrame.this, "是否删除？");
+                      if(bill_delete_confirm==JOptionPane.YES_OPTION){
                         iAccountService.deleteByID(accountSet);
 //                        jTable_bill.setModel(new BillTableModel());
                         initPageParams_bill();
@@ -417,6 +420,9 @@ public class MenuJFrame extends JFrame implements Runnable{
                         jTable_bill.setModel(new BillTableModel(currentPage_bill,pageSize));
 //                        jTable_bill=new JTable(new BillTableModel(currentPage_bill,pageSize));
                         jLabelPageInfo_bill = new JLabel("一共有"+allPages_bill+"页数据,当前为"+currentPage_bill+"页");
+                      }
+
+
                     } catch (SQLException throwables) {
                         throwables.printStackTrace();
                     }
@@ -515,6 +521,8 @@ public class MenuJFrame extends JFrame implements Runnable{
                         throwables.printStackTrace();
                     }
                 }
+                jComboBox_CheckOfPay.setSelectedIndex(0);
+                jTextField_Bill_North.setText("");
             }
         });
 
@@ -670,7 +678,7 @@ public class MenuJFrame extends JFrame implements Runnable{
                 }
             }
         });
-        
+
         jPanel_Bill_pageArea.add(jButton_Bill_headPage);
         jPanel_Bill_pageArea.add(jButton_Bill_previousPage);
         jPanel_Bill_pageArea.add(jLabelPageInfo_bill);
@@ -870,12 +878,17 @@ public class MenuJFrame extends JFrame implements Runnable{
                         supplierSet.add(jTable_supplier.getValueAt((Integer) obj,0));
                     }
                     try {
+
+                      int supplier_delete_confirm = JOptionPane.showConfirmDialog(MenuJFrame.this, "是否删除？");
+                      if (supplier_delete_confirm == JOptionPane.YES_OPTION) {
                         iSupplierService.deleteSupplier(supplierSet);
 //                        jTable_supplier.setModel(new SupplierTableModel());
                         initPageParams_supplier();
 //                        currentPage_supplier=allPages_supplier;
                         jTable_supplier.setModel(new SupplierTableModel(currentPage_supplier,pageSize));
                         jLabelPageInfo_supplier.setText("一共有"+allPages_supplier+"页数据,当前为"+currentPage_supplier+"页");
+                      }
+
                     } catch (SQLException throwables) {
                         throwables.printStackTrace();
                     }
@@ -966,6 +979,7 @@ public class MenuJFrame extends JFrame implements Runnable{
                     throwables.printStackTrace();
                 }
 //                jLabelPageInfo_supplier.setText("");
+                jTextField_Supplier_North.setText("");
             }
         });
 
@@ -1175,12 +1189,16 @@ public class MenuJFrame extends JFrame implements Runnable{
                         userSet.add(jTable_user.getValueAt((Integer) obj, 0));
                     }
                     try {
+                      int user_delete_confirm = JOptionPane.showConfirmDialog(MenuJFrame.this, "是否删除？");
+                      if (user_delete_confirm == JOptionPane.YES_OPTION) {
+
                         iUserService.deleteById(userSet);
 //                        jTable_user.setModel(new UserTableModel());
                         initPageParams_user();
                         currentPage_user=allPages_user;
                         jTable_user.setModel(new UserTableModel(currentPage_user,pageSize));
                         jLabelPageInfo_user.setText("一共有"+allPages_user+"页数据,当前为"+currentPage_user+"页");
+                      }
                     } catch (SQLException throwables) {
                         throwables.printStackTrace();
                     }
@@ -1271,7 +1289,7 @@ public class MenuJFrame extends JFrame implements Runnable{
                 } catch (SQLException throwables) {
                     throwables.printStackTrace();
                 }
-
+                jTextField_user_north.setText("");
             }
         });
 
@@ -1317,7 +1335,6 @@ public class MenuJFrame extends JFrame implements Runnable{
         jPanel_user_pageArea.add(jLabelPageInfo_user);
         jPanel_user_pageArea.add(jButton_user_next);
         jPanel_user_pageArea.add(jButton_user_endPage);
-
 
         /**
          * 卡片布局（报表管理显示界面）
@@ -1375,7 +1392,7 @@ public class MenuJFrame extends JFrame implements Runnable{
         jScrollPane_report_commodity.setOpaque(false);
         jScrollPane_report_commodity.getViewport().setOpaque(false);
         jPanel_report_center_commodity.add(jScrollPane_report_commodity, BorderLayout.CENTER);
-        
+
         init_initPageParams_report_supplier();
         jTable_report_supplier=new JTable(new GroupBySupplierTableModel(currentPage_report_supplier, pageSize));
         jTable_report_supplier.setOpaque(false);
@@ -1474,8 +1491,8 @@ public class MenuJFrame extends JFrame implements Runnable{
                 }
             }
         });
-        
-        
+
+
 
         jPanel_report_pageArea_commodity.add(jButton_report_pageArea_commodity_headPage);
         jPanel_report_pageArea_commodity.add(jButton_report_pageArea_commodity_previousPage);
